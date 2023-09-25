@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2023.09.03 18:39:00.772.cpp,C:\Users\Антон\Documents\RAD Studio\Projects\Unit1.cpp=C:\RStudioPrj\perc_4_16\Unit1.cpp</Transaction>
+    <Transaction>2023.09.03 18:39:00.772.h,C:\Users\Антон\Documents\RAD Studio\Projects\Unit1.h=C:\RStudioPrj\perc_4_16\Unit1.h</Transaction>
+    <Transaction>2023.09.03 18:39:00.772.dfm,C:\Users\Антон\Documents\RAD Studio\Projects\Unit1.dfm=C:\RStudioPrj\perc_4_16\Unit1.dfm</Transaction>
+    <Transaction>2023.09.03 18:39:47.237.cbproj,C:\Users\Антон\Documents\RAD Studio\Projects\Project1.cbproj=C:\RStudioPrj\perc_4_16\Project1.cbproj</Transaction>
+    <Transaction>2023.09.03 19:46:22.950.h,C:\RStudioPrj\perc_4_16\File1.h=C:\RStudioPrj\perc_4_16\GlobalVar.h</Transaction>
+  </Transactions>
+</BorlandProject>
