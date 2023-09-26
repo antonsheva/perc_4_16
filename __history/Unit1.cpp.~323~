@@ -728,6 +728,7 @@ void TForm1::scaleImg(float **imgArr, int maxSize, float scale, int w, int h)
 
 		newPixelPosY = y * scale+1;
         if(newPixelPosY >= maxY)break;
+		if(newPixelPosY >= maxSize)break;
 
         for(int subY = prevY+1; subY < newPixelPosY; subY++){
 			for(int subX = 0; subX < maxX; subX++){
@@ -1197,14 +1198,14 @@ void __fastcall TForm1::Button9Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-float __fastcall TForm1::getScale(S_imgPos *pos)
+float __fastcall TForm1::getScale(S_imgPos *pos, float size)
 {
     float scale;
 
     if (pos->height > pos->width){
-        scale = 26.0 / pos->height;
+        scale = size / pos->height;
 	}else{
-		scale = 26.0 / pos->width;
+		scale = size / pos->width;
     }
 
     return scale;
@@ -1226,13 +1227,17 @@ void __fastcall TForm1::btSearchCharClick(TObject *Sender)
     float scale;
     int w,h;
 
+    float tmpArr[IMG_SMALL_H][IMG_SMALL_W];
+
+    M_SET_MATRIX(G_smallTmpImgArr1,-1,IMG_SMALL_W, IMG_SMALL_H)
 	loadImgToBitmap("testImg.png", bigImg, IMG_BIG_H, IMG_BIG_W);
 	loadBitmapToArray(bigImg, G_tmpImgArr1, IMG_BIG_H, IMG_BIG_W);
 	moveImgInArray(G_tmpImgArr1, IMG_BIG_H, IMG_POS_LEFT_TOP, &pos);	
-    scale = getScale(&pos);
-    scaleImg(G_tmpImgArr1, 10, scale, pos.width, pos.height);
-    trimArray(G_tmpImgArr1, G_smallTmpImgArr1, IMG_SMALL_W,IMG_SMALL_H);
- 
+	scale = getScale(&pos, 24.0);
+	scaleImg(G_tmpImgArr1, 24, scale, pos.width, pos.height);
+     
+    trimArray(G_tmpImgArr1, G_smallTmpImgArr1, 24,24);
+    
     moveImgInArray(G_smallTmpImgArr1, IMG_SMALL_H, IMG_POS_CENTER, &pos); 
     showImgFromArray(img1, G_smallTmpImgArr1, IMG_SMALL_W, IMG_SMALL_H);
 }

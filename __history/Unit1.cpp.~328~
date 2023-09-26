@@ -716,7 +716,7 @@ void TForm1::scaleImg(float **imgArr, int maxSize, float scale, int w, int h)
     for (int y = 0; y < h; y++){
         for (int x = 0; x < w; x++){
 			newPixelPosX = x * scale+1;
-            if(newPixelPosX >= IMG_BIG_W){
+			if(newPixelPosX >= maxSize){
                 break;
             }
 			tmpArr[newPixelPosX][newPixelPosY] = imgArr[x][y];
@@ -728,6 +728,7 @@ void TForm1::scaleImg(float **imgArr, int maxSize, float scale, int w, int h)
 
 		newPixelPosY = y * scale+1;
         if(newPixelPosY >= maxY)break;
+		if(newPixelPosY >= maxSize)break;
 
         for(int subY = prevY+1; subY < newPixelPosY; subY++){
 			for(int subX = 0; subX < maxX; subX++){
@@ -1197,36 +1198,90 @@ void __fastcall TForm1::Button9Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-float __fastcall TForm1::getScale(S_imgPos *pos)
+float __fastcall TForm1::getScale(S_imgPos *pos, float size)
 {
     float scale;
 
     if (pos->height > pos->width){
-        scale = 26.0 / pos->height;
+        scale = size / (float)pos->height;
 	}else{
-		scale = 26.0 / pos->width;
+		scale = size / (float)pos->width;
     }
 
     return scale;
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TForm1::trimArray(float **mx1, float **mx2, int w, int h)
+{
+    for(int y=0; y < h; y++){
+        for(int x = 0; x < w; x++){
+            mx2[y][x] = mx1[y][x];
+        }
+    }
+}
+
 void __fastcall TForm1::btSearchCharClick(TObject *Sender)
 {
 	struct S_imgPos pos;
     float scale;
     int w,h;
-    float
+
+    float tmpArr[IMG_SMALL_H][IMG_SMALL_W];
+
+    M_SET_MATRIX(G_smallTmpImgArr1,-1,IMG_SMALL_W, IMG_SMALL_H)
 	loadImgToBitmap("testImg.png", bigImg, IMG_BIG_H, IMG_BIG_W);
 	loadBitmapToArray(bigImg, G_tmpImgArr1, IMG_BIG_H, IMG_BIG_W);
 	moveImgInArray(G_tmpImgArr1, IMG_BIG_H, IMG_POS_LEFT_TOP, &pos);	
-    scale = getScale(&pos);
-    scaleImg(G_smallTmpImgArr1, 26, scale, pos.width, pos.height);
-
- 
- 
+	scale = getScale(&pos, 24.0);
+	scaleImg(G_tmpImgArr1, 24, scale, pos.width, pos.height);
+     
+    trimArray(G_tmpImgArr1, G_smallTmpImgArr1, 24,24);
+    
     moveImgInArray(G_smallTmpImgArr1, IMG_SMALL_H, IMG_POS_CENTER, &pos); 
-    showImgFromArray(img1, G_smallTmpImgArr1);
+    showImgFromArray(img1, G_smallTmpImgArr1, IMG_SMALL_W, IMG_SMALL_H);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Button15Click(TObject *Sender)
+{
+    #define MAX_IMG_SIZE 24
+    bool err = false;
+	struct S_imgPos pos;
+    float scale;
+    int w,h;
+
+    for (int i = 0; i < PATT_QTY; i++)
+    {
+        M_SET_ARR(P1_patt[i], -1, IN_N_LEN) 
+        M_SET_MATRIX(G_smallTmpImgArr1, -1, IMG_SMALL_H, IMG_SMALL_W)
+        
+        loadImgToBitmap(imgFiles[i], bigImg, IMG_BIG_H, IMG_BIG_W);
+        loadBitmapToArray(bigImg, G_tmpImgArr1, IMG_BIG_H, IMG_BIG_W); 
+        moveImgInArray(G_tmpImgArr1, IMG_BIG_H, IMG_POS_LEFT_TOP, &pos);	
+        scale = getScale(&pos, MAX_IMG_SIZE);
+        scaleImg(G_tmpImgArr1, MAX_IMG_SIZE, scale, pos.width, pos.height);
+        
+        trimArray(G_tmpImgArr1, G_smallTmpImgArr1, MAX_IMG_SIZE,MAX_IMG_SIZE);
+        moveImgInArray(G_smallTmpImgArr1, IMG_SMALL_H, IMG_POS_CENTER, &pos); 
+         
+		M_COPY_MX_TO_ARR(G_smallTmpImgArr1,IMG_SMALL_H,IMG_SMALL_W,P1_patt[i])
+		lbl1->Caption = i;
+		Application->ProcessMessages();
+    }
+    if (!err)
+        edInfo->Text = "images was loaded to patterns";
+    return;
+    #undef MAX_IMG_SIZE
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Button16Click(TObject *Sender)
+{
+  int pattNum = StrToInt(edPattNum->Text);
+
+  M_GET_MATRIX(IMG_SMALL_H,IMG_SMALL_W,P1_patt[pattNum],G_smallTmpImgArr1);
+  showImgFromArray(img1,G_smallTmpImgArr1, IMG_SMALL_H, IMG_SMALL_W);
 }
 //---------------------------------------------------------------------------
 

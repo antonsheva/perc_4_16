@@ -74,11 +74,18 @@ object Form1: TForm1
     Height = 13
     Caption = 'n3'
   end
-  object Image1: TImage
+  object bigImg: TImage
     Left = 706
     Top = 61
     Width = 140
     Height = 140
+  end
+  object Label7: TLabel
+    Left = 397
+    Top = 70
+    Width = 43
+    Height = 13
+    Caption = 'scale img'
   end
   object edIn1: TEdit
     Left = 32
@@ -307,7 +314,7 @@ object Form1: TForm1
     Top = 39
     Width = 75
     Height = 25
-    Caption = 'Button8'
+    Caption = 'show img'
     TabOrder = 24
     OnClick = Button8Click
   end
@@ -366,30 +373,57 @@ object Form1: TForm1
     OnClick = Button14Click
   end
   object chk1: TCheckBox
-    Left = 294
-    Top = 197
-    Width = 17
-    Height = 19
+    Left = 293
+    Top = 192
+    Width = 16
+    Height = 17
     Checked = True
     State = cbChecked
     TabOrder = 31
   end
   object chk2: TCheckBox
-    Left = 322
-    Top = 191
-    Width = 17
-    Height = 19
+    Left = 323
+    Top = 192
+    Width = 16
+    Height = 17
     Checked = True
     State = cbChecked
     TabOrder = 32
   end
   object chk3: TCheckBox
     Left = 348
-    Top = 191
-    Width = 17
-    Height = 19
+    Top = 192
+    Width = 16
+    Height = 17
     Checked = True
     State = cbChecked
     TabOrder = 33
+  end
+  object edScaleImg: TEdit
+    Left = 397
+    Top = 89
+    Width = 75
+    Height = 21
+    TabOrder = 34
+    Text = '1,0'
+    OnChange = edScaleImgChange
+  end
+  object Button9: TButton
+    Left = 397
+    Top = 116
+    Width = 75
+    Height = 25
+    Caption = 'show tmp img'
+    TabOrder = 35
+    OnClick = Button9Click
+  end
+  object btSearchChar: TButton
+    Left = 397
+    Top = 162
+    Width = 75
+    Height = 25
+    Caption = 'search char'
+    TabOrder = 36
+    OnClick = btSearchCharClick
   end
 end

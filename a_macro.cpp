@@ -48,6 +48,8 @@
 #define M_RESET_ARR(arr, len)\
     for (int rstaI=0; rstaI < len; rstaI++) arr[rstaI]  = 0;
 
+#define M_SET_ARR(arr, val, len)\
+    for (int rstaI=0; rstaI < len; rstaI++) arr[rstaI]  = val;
 
 
 #define M_RESET_MATRIX(matrix, len)            \
@@ -76,7 +78,12 @@
         arr2[i]=arr1[i];\
     }
 
-
+#define M_COPY_MX_TO_ARR(mx, h,w, arr)\
+    for(int y=0; y<h; y++){\
+        for(int x=0; x<w; x++){\
+            arr[y*w+x] = mx[y][x];\
+        }\
+    }
 
 
 

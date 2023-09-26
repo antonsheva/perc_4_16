@@ -58,6 +58,11 @@ __published:	// IDE-managed Components
 	TLabel *Label7;
 	TButton *Button9;
 	TButton *btSearchChar;
+	TButton *Button15;
+	TEdit *edPattNum;
+	TButton *Button16;
+	TLabel *Label8;
+	TButton *btTest;
 	void __fastcall Button1Click(TObject *Sender);
 	void __fastcall edAlfaChange(TObject *Sender);
 	void __fastcall edSigmodChange(TObject *Sender);
@@ -78,6 +83,9 @@ __published:	// IDE-managed Components
 	void __fastcall edScaleImgChange(TObject *Sender);
 	void __fastcall Button9Click(TObject *Sender);
     void __fastcall btSearchCharClick(TObject *Sender);
+	void __fastcall Button15Click(TObject *Sender);
+	void __fastcall Button16Click(TObject *Sender);
+	void __fastcall btTestClick(TObject *Sender);
 
 private:    // User declarations
 public:		// User declarations

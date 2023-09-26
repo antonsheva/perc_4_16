@@ -2,7 +2,7 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 516
+  ClientHeight = 623
   ClientWidth = 875
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -48,8 +48,8 @@ object Form1: TForm1
     Caption = 'Cycle qty'
   end
   object img1: TImage
-    Left = 706
-    Top = 8
+    Left = 413
+    Top = 180
     Width = 28
     Height = 28
   end
@@ -75,8 +75,8 @@ object Form1: TForm1
     Caption = 'n3'
   end
   object bigImg: TImage
-    Left = 706
-    Top = 61
+    Left = 413
+    Top = 214
     Width = 140
     Height = 140
   end
@@ -86,6 +86,13 @@ object Form1: TForm1
     Width = 43
     Height = 13
     Caption = 'scale img'
+  end
+  object Label8: TLabel
+    Left = 188
+    Top = 331
+    Width = 43
+    Height = 13
+    Caption = 'patt num'
   end
   object edIn1: TEdit
     Left = 32
@@ -227,8 +234,8 @@ object Form1: TForm1
     OnChange = edAlfaChange
   end
   object edSigmod: TEdit
-    Left = 240
-    Top = 190
+    Left = 239
+    Top = 194
     Width = 48
     Height = 21
     MaxLength = 2
@@ -259,7 +266,7 @@ object Form1: TForm1
   end
   object edInfo: TEdit
     Left = 336
-    Top = 240
+    Top = 360
     Width = 436
     Height = 21
     Enabled = False
@@ -268,15 +275,15 @@ object Form1: TForm1
   end
   object lb1: TListBox
     Left = 8
-    Top = 269
+    Top = 389
     Width = 764
     Height = 236
     ItemHeight = 13
     TabOrder = 21
   end
   object GroupBox1: TGroupBox
-    Left = 512
-    Top = 16
+    Left = 8
+    Top = 335
     Width = 168
     Height = 48
     Caption = #1055#1072#1088#1089#1080#1085#1075' '#1073#1080#1073#1083#1080#1086#1090#1077#1082#1080
@@ -301,7 +308,7 @@ object Form1: TForm1
     end
   end
   object Button4: TButton
-    Left = 397
+    Left = 413
     Top = 8
     Width = 75
     Height = 25
@@ -310,7 +317,7 @@ object Form1: TForm1
     OnClick = Button4Click
   end
   object Button8: TButton
-    Left = 397
+    Left = 413
     Top = 39
     Width = 75
     Height = 25
@@ -320,7 +327,7 @@ object Form1: TForm1
   end
   object Button10: TButton
     Left = 515
-    Top = 83
+    Top = 8
     Width = 75
     Height = 25
     Caption = 'load imgs'
@@ -329,7 +336,7 @@ object Form1: TForm1
   end
   object Button7: TButton
     Left = 515
-    Top = 114
+    Top = 39
     Width = 75
     Height = 25
     Caption = 'lern'
@@ -337,8 +344,8 @@ object Form1: TForm1
     OnClick = Button7Click
   end
   object Button11: TButton
-    Left = 611
-    Top = 83
+    Left = 515
+    Top = 70
     Width = 75
     Height = 25
     Caption = 'test 1'
@@ -346,8 +353,8 @@ object Form1: TForm1
     OnClick = Button11Click
   end
   object Button12: TButton
-    Left = 611
-    Top = 114
+    Left = 515
+    Top = 101
     Width = 75
     Height = 25
     Caption = 'test 2'
@@ -355,8 +362,8 @@ object Form1: TForm1
     OnClick = Button12Click
   end
   object Button13: TButton
-    Left = 611
-    Top = 145
+    Left = 515
+    Top = 132
     Width = 75
     Height = 25
     Caption = 'test 3'
@@ -364,8 +371,8 @@ object Form1: TForm1
     OnClick = Button13Click
   end
   object Button14: TButton
-    Left = 611
-    Top = 176
+    Left = 515
+    Top = 163
     Width = 75
     Height = 25
     Caption = 'test 4'
@@ -377,8 +384,6 @@ object Form1: TForm1
     Top = 192
     Width = 16
     Height = 17
-    Checked = True
-    State = cbChecked
     TabOrder = 31
   end
   object chk2: TCheckBox
@@ -386,8 +391,6 @@ object Form1: TForm1
     Top = 192
     Width = 16
     Height = 17
-    Checked = True
-    State = cbChecked
     TabOrder = 32
   end
   object chk3: TCheckBox
@@ -400,7 +403,7 @@ object Form1: TForm1
     TabOrder = 33
   end
   object edScaleImg: TEdit
-    Left = 397
+    Left = 413
     Top = 89
     Width = 75
     Height = 21
@@ -409,7 +412,7 @@ object Form1: TForm1
     OnChange = edScaleImgChange
   end
   object Button9: TButton
-    Left = 397
+    Left = 413
     Top = 116
     Width = 75
     Height = 25
@@ -418,12 +421,48 @@ object Form1: TForm1
     OnClick = Button9Click
   end
   object btSearchChar: TButton
-    Left = 397
-    Top = 162
+    Left = 413
+    Top = 147
     Width = 75
     Height = 25
     Caption = 'search char'
     TabOrder = 36
     OnClick = btSearchCharClick
+  end
+  object Button15: TButton
+    Left = 616
+    Top = 8
+    Width = 81
+    Height = 25
+    Caption = ' load and scale'
+    TabOrder = 37
+    OnClick = Button15Click
+  end
+  object edPattNum: TEdit
+    Left = 182
+    Top = 353
+    Width = 29
+    Height = 21
+    NumbersOnly = True
+    TabOrder = 38
+    Text = '0'
+  end
+  object Button16: TButton
+    Left = 217
+    Top = 350
+    Width = 75
+    Height = 25
+    Caption = 'show pattern'
+    TabOrder = 39
+    OnClick = Button16Click
+  end
+  object btTest: TButton
+    Left = 616
+    Top = 39
+    Width = 81
+    Height = 25
+    Caption = 'test'
+    TabOrder = 40
+    OnClick = btTestClick
   end
 end

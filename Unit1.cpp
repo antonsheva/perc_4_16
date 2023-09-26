@@ -1203,9 +1203,9 @@ float __fastcall TForm1::getScale(S_imgPos *pos, float size)
     float scale;
 
     if (pos->height > pos->width){
-        scale = size / pos->height;
+        scale = size / (float)pos->height;
 	}else{
-		scale = size / pos->width;
+		scale = size / (float)pos->width;
     }
 
     return scale;
@@ -1240,6 +1240,105 @@ void __fastcall TForm1::btSearchCharClick(TObject *Sender)
     
     moveImgInArray(G_smallTmpImgArr1, IMG_SMALL_H, IMG_POS_CENTER, &pos); 
     showImgFromArray(img1, G_smallTmpImgArr1, IMG_SMALL_W, IMG_SMALL_H);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Button15Click(TObject *Sender)
+{
+    #define MAX_IMG_SIZE 24
+    bool err = false;
+	struct S_imgPos pos;
+    float scale;
+    int w,h;
+
+    for (int i = 0; i < PATT_QTY; i++)
+    {
+        M_SET_ARR(P1_patt[i], -1, IN_N_LEN) 
+        M_SET_MATRIX(G_smallTmpImgArr1, -1, IMG_SMALL_H, IMG_SMALL_W)
+        
+        loadImgToBitmap(imgFiles[i], bigImg, IMG_BIG_H, IMG_BIG_W);
+        loadBitmapToArray(bigImg, G_tmpImgArr1, IMG_BIG_H, IMG_BIG_W); 
+        moveImgInArray(G_tmpImgArr1, IMG_BIG_H, IMG_POS_LEFT_TOP, &pos);	
+        scale = getScale(&pos, MAX_IMG_SIZE);
+        scaleImg(G_tmpImgArr1, MAX_IMG_SIZE, scale, pos.width, pos.height);
+        
+        trimArray(G_tmpImgArr1, G_smallTmpImgArr1, MAX_IMG_SIZE,MAX_IMG_SIZE);
+        moveImgInArray(G_smallTmpImgArr1, IMG_SMALL_H, IMG_POS_CENTER, &pos); 
+         
+		M_COPY_MX_TO_ARR(G_smallTmpImgArr1,IMG_SMALL_H,IMG_SMALL_W,P1_patt[i])
+		lbl1->Caption = i;
+		Application->ProcessMessages();
+    }
+    if (!err)
+        edInfo->Text = "images was loaded to patterns";
+    return;
+    #undef MAX_IMG_SIZE
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Button16Click(TObject *Sender)
+{
+  int pattNum = StrToInt(edPattNum->Text);
+
+  M_GET_MATRIX(IMG_SMALL_H,IMG_SMALL_W,P1_patt[pattNum],G_smallTmpImgArr1);
+  showImgFromArray(img1,G_smallTmpImgArr1, IMG_SMALL_H, IMG_SMALL_W);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::btTestClick(TObject *Sender)
+{
+#define MAX_IMG_SIZE 24
+    
+    struct S_imgPos pos;
+    float scale;
+
+    float in[IN_N_LEN];
+    float n1[MN1_LEN];
+    float n2[MN2_LEN];
+    float nGoal[OUT_N_LEN];
+
+    M_RESET_ARR(n1, MN1_LEN)
+    M_RESET_ARR(n2, MN2_LEN)
+    M_RESET_ARR(nGoal, OUT_N_LEN)
+
+    M_SET_MATRIX(G_smallTmpImgArr1, -1, IMG_SMALL_H, IMG_SMALL_W)
+
+    loadImgToBitmap("testImg1.png", bigImg, IMG_BIG_H, IMG_BIG_W);
+    loadBitmapToArray(bigImg, G_tmpImgArr1, IMG_BIG_H, IMG_BIG_W); 
+    moveImgInArray(G_tmpImgArr1, IMG_BIG_H, IMG_POS_LEFT_TOP, &pos);	
+    scale = getScale(&pos, MAX_IMG_SIZE);
+    scaleImg(G_tmpImgArr1, MAX_IMG_SIZE, scale, pos.width, pos.height);
+    
+    trimArray(G_tmpImgArr1, G_smallTmpImgArr1, MAX_IMG_SIZE,MAX_IMG_SIZE);
+    moveImgInArray(G_smallTmpImgArr1, IMG_SMALL_H, IMG_POS_CENTER, &pos); 
+    showImgFromArray(img1,G_smallTmpImgArr1, IMG_SMALL_H, IMG_SMALL_W);
+    
+    M_COPY_MX_TO_ARR(G_smallTmpImgArr1,IMG_SMALL_H,IMG_SMALL_W,in)
+
+    mf->matrixMul(in, M_ARR(IN_N_LEN, MN1_LEN, P1_W1), n1);
+    if (chk1->Checked)
+        mf->getSigmoid(n1, MN1_LEN, G_sigmoidTilt);
+
+    mf->matrixMul(n1, M_ARR(MN1_LEN, MN2_LEN, P1_W2), n2);
+    if (chk2->Checked)
+        mf->getSigmoid(n2, MN2_LEN, G_sigmoidTilt);
+
+    mf->matrixMul(n2, M_ARR(MN2_LEN, OUT_N_LEN, P1_W3), nGoal);
+    if (chk3->Checked)
+        mf->getSigmoid(nGoal, OUT_N_LEN, G_sigmoidTilt);
+
+    edOut1->Text = FormatFloat("0.00000000", nGoal[0]);
+    edOut2->Text = FormatFloat("0.00000000", nGoal[1]);
+    edOut3->Text = FormatFloat("0.00000000", nGoal[2]);
+    edOut4->Text = FormatFloat("0.00000000", nGoal[3]);
+    edOut5->Text = FormatFloat("0.00000000", nGoal[4]);
+    edOut6->Text = FormatFloat("0.00000000", nGoal[5]);
+    edOut7->Text = FormatFloat("0.00000000", nGoal[6]);
+    edOut8->Text = FormatFloat("0.00000000", -11);
+    edOut9->Text = FormatFloat("0.00000000", -11);
+    edOut10->Text = FormatFloat("0.00000000", -11);
+
+#undef MAX_IMG_SIZE
 }
 //---------------------------------------------------------------------------
 
