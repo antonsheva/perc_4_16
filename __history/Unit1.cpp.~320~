@@ -22,6 +22,8 @@ TForm1 *Form1;
 
 #define IMG_BIG_H 140
 #define IMG_BIG_W 140
+#define IMG_SMALL_H 28
+#define IMG_SMALL_W 28
 
 #define LAYER_QTY 4
 
@@ -139,6 +141,8 @@ float P1_tmp[784];
 
 float **G_tmpImgArr1;
 float **G_tmpImgArr2;
+float **G_smallTmpImgArr1;
+float **G_smallTmpImgArr2;
 
 
 
@@ -188,16 +192,25 @@ void TForm1::initArrays()
     //    }
 
     G_tmpImgArr1 = new float *[IMG_BIG_H];
-    for (int i = 0; i < IMG_BIG_H; i++)
-    {
+    for (int i = 0; i < IMG_BIG_H; i++){
         G_tmpImgArr1[i] = new float[IMG_BIG_W];
     }
 
     G_tmpImgArr2 = new float *[IMG_BIG_H];
-    for (int i = 0; i < IMG_BIG_H; i++)
-    {
+    for (int i = 0; i < IMG_BIG_H; i++){
         G_tmpImgArr2[i] = new float[IMG_BIG_W];
     }
+
+    G_smallTmpImgArr1 = new float *[IMG_SMALL_H];
+    for (int i = 0; i < IMG_SMALL_H; i++){
+        G_smallTmpImgArr1[i] = new float[IMG_SMALL_H];
+    }
+    G_smallTmpImgArr2 = new float *[IMG_SMALL_H];
+    for (int i = 0; i < IMG_SMALL_H; i++){
+        G_smallTmpImgArr2[i] = new float[IMG_SMALL_H];
+    }
+
+    
 }
 
 void TForm1::initImgNameArray()
@@ -687,26 +700,50 @@ void __fastcall TForm1::Button6Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-
-
-void TForm1::scaleImg(float **imgArr, float scale, int w, int h)
+void TForm1::scaleImg(float **imgArr, int maxSize, float scale, int w, int h)
 {
-    float tmpArr[IMG_BIG_W][IMG_BIG_H];
-    M_SET_MATRIX(tmpArr,-1,IMG_BIG_W,IMG_BIG_H)
+	int prevX = 1, prevY = 1;
+    float **tmpArr = new float* [maxSize];
+    for (int i = 0; i < maxSize; i++){
+        tmpArr[i] = new float[maxSize];
+    }
+    M_SET_MATRIX(tmpArr,-1,maxSize,maxSize)
+
     int newPixelPosX, newPixelPosY = 0;
+    int maxX = w*scale <= maxSize ? w*scale : maxSize;
+    int maxY = h*scale <= maxSize ? h*scale : maxSize;
+    
     for (int y = 0; y < h; y++){
         for (int x = 0; x < w; x++){
-            newPixelPosX = x * scale;
-            tmpArr[newPixelPosX][newPixelPosY] = imgArr[x][y];
+			newPixelPosX = x * scale+1;
+			if(newPixelPosX >= maxSize){
+                break;
+            }
+			tmpArr[newPixelPosX][newPixelPosY] = imgArr[x][y];
+			for(int subX = prevX+1; subX < newPixelPosX; subX++){
+			   tmpArr[subX][newPixelPosY] = imgArr[x][y];
+			}
+			prevX = newPixelPosX;
         }
-        newPixelPosY = y * scale;
+
+		newPixelPosY = y * scale+1;
+        if(newPixelPosY >= maxY)break;
+
+        for(int subY = prevY+1; subY < newPixelPosY; subY++){
+			for(int subX = 0; subX < maxX; subX++){
+			   tmpArr[subX][subY] = tmpArr[subX][subY-1];
+			}
+        }
+		prevY = newPixelPosY;
     }
 
-    for (int y = 0; y < IMG_BIG_H; y++){
-        for (int x = 0; x < IMG_BIG_W; x++){
+    for (int y = 0; y < maxSize; y++){
+        for (int x = 0; x < maxSize; x++){
             imgArr[x][y] = tmpArr[x][y]; 
         }
-    }   
+    }  
+
+    delete tmpArr; 
 }
 //---------------------------------------------------------------------------
 
@@ -715,8 +752,8 @@ void __fastcall TForm1::Button4Click(TObject *Sender)
 	struct S_imgPos pos;
 	loadImgToBitmap("testImg.png", bigImg, IMG_BIG_H, IMG_BIG_W);
 	loadBitmapToArray(bigImg, G_tmpImgArr1, IMG_BIG_H, IMG_BIG_W);
-	moveImgInArray(G_tmpImgArr1, IMG_POS_LEFT_TOP, &pos);	 
-	scaleImg(G_tmpImgArr1, G_scaleImg, pos.width, pos.height);
+	moveImgInArray(G_tmpImgArr1, IMG_BIG_H, IMG_POS_LEFT_TOP, &pos);	 
+	scaleImg(G_tmpImgArr1, IMG_BIG_H, G_scaleImg, pos.width, pos.height);
 }
 //---------------------------------------------------------------------------
 
@@ -736,24 +773,27 @@ void TForm1::showImgFromArray(TImage *img, float **arr, int w, int h)
 	}
 }
 
-void TForm1::moveImgInArray(float **imgArr, int position, S_imgPos *imgParam)
+void TForm1::moveImgInArray(float **imgArr, int maxSize, int position, S_imgPos *imgParam)
 {
     struct S_imgPos pos;
     int startX, startY;
-    float tmpArr[IMG_BIG_W][IMG_BIG_H];
+    float **tmpArr = new float *[maxSize];
+    for(int i = 0; i < maxSize; i++){
+        tmpArr[i] = new float[maxSize];
+    }
 
-    M_SET_MATRIX(tmpArr,-1,IMG_BIG_W,IMG_BIG_H)
-    srchSnglImgPos(imgArr, &pos, IMG_BIG_H, IMG_BIG_W);
+    M_SET_MATRIX(tmpArr,-1,maxSize,maxSize)
+    srchSnglImgPos(imgArr, &pos, maxSize, maxSize);
 
 	// img set to center
     if(position == IMG_POS_CENTER){
-        startX = (IMG_BIG_W-pos.width)/2;
-        startY = (IMG_BIG_H-pos.height)/2;
+        startX = (maxSize-pos.width)/2;
+        startY = (maxSize-pos.height)/2;
     }
     // img set to left-top position
     if(position == IMG_POS_LEFT_TOP){
-        startX = 0;
-        startY = 0;
+        startX = 1;
+        startY = 1;
     }
 
 	for (int x = 0; x < pos.width; x++){
@@ -763,8 +803,8 @@ void TForm1::moveImgInArray(float **imgArr, int position, S_imgPos *imgParam)
 	}
     *imgParam = pos;
  
-	for (int x = 0; x < IMG_BIG_W; x++){
-		for (int y = 0; y < IMG_BIG_H; y++){
+	for (int x = 0; x < maxSize; x++){
+		for (int y = 0; y < maxSize; y++){
 			imgArr[x][y] = tmpArr[x][y];
 		}
 	}    
@@ -855,25 +895,25 @@ void TForm1::srchSnglImgPos(float **G_tmpImgArr1, S_imgPos *pos, int h, int w)
     {
         for (int x = 0; x < w; x++)
         {
-            if (G_tmpImgArr1[x][y] > -0.5)
+			if (G_tmpImgArr1[x][y] > -0.8)
             {
                 stop = true;
-				pos->yTop = y;
-                break;
-            }
-        }
-        if (stop)
-            break;
-    }
+				pos->yTop = y-1;
+				break;
+			}
+		}
+		if (stop)
+			break;
+	}
 
-    stop = false;
-    for (int x = 0; x < w; x++)
-    {
-        for (int y = 0; y < h; y++)
-        {
-            if (G_tmpImgArr1[x][y] > -0.5)
-            {
-                stop = true;
+	stop = false;
+	for (int x = 0; x < w; x++)
+	{
+		for (int y = 0; y < h; y++)
+		{
+			if (G_tmpImgArr1[x][y] > -0.8)
+			{
+				stop = true;
 				pos->xLetf = x;
                 break;
             }
@@ -887,7 +927,7 @@ void TForm1::srchSnglImgPos(float **G_tmpImgArr1, S_imgPos *pos, int h, int w)
     {
         for (int x = w - 1; x >= 0; x--)
         {
-            if (G_tmpImgArr1[x][y] > -0.5)
+			if (G_tmpImgArr1[x][y] > -0.8)
             {
                 stop = true;
 				pos->yBottom = y+1;
@@ -903,7 +943,7 @@ void TForm1::srchSnglImgPos(float **G_tmpImgArr1, S_imgPos *pos, int h, int w)
     {
         for (int y = h - 1; y >= 0; y--)
         {
-            if (G_tmpImgArr1[x][y] > -0.5)
+            if (G_tmpImgArr1[x][y] > -0.8)
             {
                 stop = true;
                 pos->xRight = x+1;
@@ -1133,7 +1173,7 @@ void __fastcall TForm1::Button8Click(TObject *Sender)
 {
  struct S_imgPos pos;
  
- moveImgInArray(G_tmpImgArr1, IMG_POS_CENTER, &pos); 
+ moveImgInArray(G_tmpImgArr1, IMG_BIG_H, IMG_POS_CENTER, &pos); 
  showImgFromArray(bigImg, G_tmpImgArr1);
 }
 //---------------------------------------------------------------------------
@@ -1154,6 +1194,57 @@ void __fastcall TForm1::edScaleImgChange(TObject *Sender)
 void __fastcall TForm1::Button9Click(TObject *Sender)
 {
  showImgFromArray(bigImg, G_tmpImgArr1);
+}
+//---------------------------------------------------------------------------
+
+float __fastcall TForm1::getScale(S_imgPos *pos, float size)
+{
+    float scale;
+
+    if (pos->height > pos->width){
+        scale = size / pos->height;
+	}else{
+		scale = size / pos->width;
+    }
+
+    return scale;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::trimArray(float **mx1, float **mx2, int w, int h)
+{
+    for(int y=0; y < h; y++){
+        for(int x = 0; x < w; x++){
+            mx2[y][x] = mx1[y][x];
+        }
+    }
+}
+
+void __fastcall TForm1::btSearchCharClick(TObject *Sender)
+{
+	struct S_imgPos pos;
+    float scale;
+    int w,h;
+
+    float tmpArr[IMG_SMALL_H][IMG_SMALL_W];
+
+    M_SET_MATRIX(G_smallTmpImgArr1,-1,IMG_SMALL_W, IMG_SMALL_H)
+	loadImgToBitmap("testImg.png", bigImg, IMG_BIG_H, IMG_BIG_W);
+	loadBitmapToArray(bigImg, G_tmpImgArr1, IMG_BIG_H, IMG_BIG_W);
+	moveImgInArray(G_tmpImgArr1, IMG_BIG_H, IMG_POS_LEFT_TOP, &pos);	
+	scale = getScale(&pos, 16.0);
+    scaleImg(G_tmpImgArr1, 16, scale, pos.width, pos.height);
+
+    for(int y=0; y<28; y++){
+        for(int x=0; x<28; x++){
+            tmpArr[y][x] = G_tmpImgArr1[y][x];
+        }
+    }
+     
+    trimArray(G_tmpImgArr1, G_smallTmpImgArr1, IMG_SMALL_W,IMG_SMALL_H);
+    
+    moveImgInArray(G_smallTmpImgArr1, IMG_SMALL_H, IMG_POS_CENTER, &pos); 
+    showImgFromArray(img1, G_smallTmpImgArr1, IMG_SMALL_W, IMG_SMALL_H);
 }
 //---------------------------------------------------------------------------
 

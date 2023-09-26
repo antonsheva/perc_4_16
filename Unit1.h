@@ -94,7 +94,8 @@ public:		// User declarations
 	};
 	
 
-    int __fastcall getScale(S_imgPos *pos);
+    void __fastcall trimArray(float **mx1, float **mx2, int w, int h);
+    float __fastcall getScale(S_imgPos *pos, float size);
 
     void TForm1::scaleArray(float *arr, int len);
 	void initArrays();
@@ -111,8 +112,8 @@ public:		// User declarations
     void loadBitmapToArray(TImage *bitmap, float **arr, int h, int w);
     void srchSnglImgPos(float **G_tmpImgArr1, S_imgPos *pos, int h, int w);
     void loadSmallImgToArray(float *arr);
-	void scaleImg(float **imgArr, float scale, int w, int h);
-	void moveImgInArray(float **imgArr, int position, S_imgPos *imgParam);
+	void scaleImg(float **imgArr, int maxSize, float scale, int w, int h);
+	void moveImgInArray(float **imgArr, int maxSize, int position, S_imgPos *imgParam);
 
 };
 //---------------------------------------------------------------------------
