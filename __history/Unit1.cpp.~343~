@@ -15,6 +15,8 @@
 #pragma resource "*.dfm"
 TForm1 *Form1;
 
+#define PATT_2 1
+
 #define N0_LEN 4
 #define N1_LEN 10
 #define N2_LEN 10
@@ -52,11 +54,88 @@ float arrDeltaW3[N2_LEN][N_GOAL_LEN];
 #define IN_N_LEN 784
 #define MN1_LEN 16
 #define MN2_LEN 16
+
+
+
+#if     PATT_2
+#define PATT_QTY 60
+#define OUT_N_LEN 10
+float P1_goal[PATT_QTY][OUT_N_LEN] = {
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+ 
+    {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+    {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+ 
+    {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
+    {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
+ 
+    {0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+    {0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
+ 
+    {0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+    {0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+ 
+    {0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
+    {0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
+ 
+    {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
+    {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
+ 
+    {0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+    {0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+ 
+    {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
+ 
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+	{0, 0, 0, 0, 0, 0, 0, 0, 0, 1}
+ 
+};
+#else
+
 #define OUT_N_LEN 7
 #define PATT_QTY 42
-
-#define DIG_PATT_QTY 60
-
 float P1_goal[PATT_QTY][OUT_N_LEN] = {
     {1, 0, 0, 0, 0, 0, 0},
     {1, 0, 0, 0, 0, 0, 0},
@@ -109,23 +188,26 @@ float P1_goal[PATT_QTY][OUT_N_LEN] = {
 
 };
 
+#endif
+
 String imgFiles[PATT_QTY];
-String imgDigitFiles[DIG_PATT_QTY];
+ 
 
 float P1_patt[PATT_QTY][IN_N_LEN];
 // float **P1_patt;
+
 
 float P1_inN[IN_N_LEN];
 float P1_mN1[MN1_LEN];
 float P1_mN2[MN2_LEN];
 float P1_outN[OUT_N_LEN];
 
-float P1_W1[IN_N_LEN][MN1_LEN];
-float P1_W2[MN1_LEN][MN2_LEN];
-float P1_W3[MN2_LEN][OUT_N_LEN];
-// float **P1_W1;
-// float **P1_W2;
-// float **P1_W3;
+// float P1_W1[IN_N_LEN][MN1_LEN];
+// float P1_W2[MN1_LEN][MN2_LEN];
+// float P1_W3[MN2_LEN][OUT_N_LEN];
+float **P1_W1;
+float **P1_W2;
+float **P1_W3;
 
 float P1_deltaIn[IN_N_LEN];
 float P1_deltaMN1[MN1_LEN];
@@ -160,34 +242,34 @@ __fastcall TForm1::TForm1(TComponent *Owner)
 	G_stop = false;
 	G_scaleImg = 1;
 
+    
+    #if PATT_2
+    initImgDigits();
+    #else
     initImgNameArray();
+    #endif
+
     initArrays();
     initWeights();
 }
 
 void TForm1::initArrays()
 {
-    //    P1_W1 = new float* [IN_N_LEN];
-    //    for (int i = 0; i < IN_N_LEN; i++)
-    //    {
-    // 	   P1_W1[i] = new float[MN1_LEN];
-    //    }
-
-    //    P1_W2 = new float* [MN1_LEN];
-    //    for (int i = 0; i < MN1_LEN; i++)
-    //    {
-    // 	   P1_W2[i] = new float[MN2_LEN];
-    //    }
-    //    P1_W3 = new float* [MN2_LEN];
-    //    for (int i = 0; i < MN2_LEN; i++)
-    //    {
-    //        P1_W3[i] = new float[OUT_N_LEN];
-    //    }
+       P1_W1 = new float* [IN_N_LEN];
+       for (int i = 0; i < IN_N_LEN; i++){
+    	   P1_W1[i] = new float[MN1_LEN];
+       }
+       P1_W2 = new float* [MN1_LEN];
+       for (int i = 0; i < MN1_LEN; i++){
+    	   P1_W2[i] = new float[MN2_LEN];
+       }
+       P1_W3 = new float* [MN2_LEN];
+       for (int i = 0; i < MN2_LEN; i++){
+           P1_W3[i] = new float[OUT_N_LEN];
+       }
 
     //    P1_patt = new double* [PATT_QTY];
-
-    //    for (int i = 0; i < PATT_QTY; i++)
-    //    {
+    //    for (int i = 0; i < PATT_QTY; i++){
     //        P1_patt[i] = new double[IN_N_LEN];
     //    }
 
@@ -267,66 +349,66 @@ void TForm1::initImgNameArray()
 
 void TForm1::initImgDigits()
 {
-    imgDigitFiles[0] = "img/d1_1";
-    imgDigitFiles[1] = "img/d1_2";
-    imgDigitFiles[2] = "img/d1_3";
-    imgDigitFiles[3] = "img/d1_4";
-    imgDigitFiles[4] = "img/d1_5";
-    imgDigitFiles[5] = "img/d1_6";
-    imgDigitFiles[6] = "img/d2_1";
-    imgDigitFiles[7] = "img/d2_2";
-    imgDigitFiles[8] = "img/d2_3";
-    imgDigitFiles[9] = "img/d2_4";
-    imgDigitFiles[10] = "img/d2_5";
-    imgDigitFiles[11] = "img/d2_6";
-    imgDigitFiles[12] = "img/d3_1";
-    imgDigitFiles[13] = "img/d3_2";
-    imgDigitFiles[14] = "img/d3_3";
-    imgDigitFiles[15] = "img/d3_4";
-    imgDigitFiles[16] = "img/d3_5";
-    imgDigitFiles[17] = "img/d3_6";
-    imgDigitFiles[18] = "img/d4_1";
-    imgDigitFiles[19] = "img/d4_2";
-    imgDigitFiles[20] = "img/d4_3";
-    imgDigitFiles[21] = "img/d4_4";
-    imgDigitFiles[22] = "img/d4_5";
-    imgDigitFiles[23] = "img/d4_6";
-    imgDigitFiles[24] = "img/d5_1";
-    imgDigitFiles[25] = "img/d5_2";
-    imgDigitFiles[26] = "img/d5_3";
-    imgDigitFiles[27] = "img/d5_4";
-    imgDigitFiles[28] = "img/d5_5";
-    imgDigitFiles[29] = "img/d5_6";
-    imgDigitFiles[30] = "img/d6_1";
-    imgDigitFiles[31] = "img/d6_2";
-    imgDigitFiles[32] = "img/d6_3";
-    imgDigitFiles[33] = "img/d6_4";
-    imgDigitFiles[34] = "img/d6_5";
-    imgDigitFiles[35] = "img/d6_6";
-    imgDigitFiles[36] = "img/d7_1";
-    imgDigitFiles[37] = "img/d7_2";
-    imgDigitFiles[38] = "img/d7_3";
-    imgDigitFiles[39] = "img/d7_4";
-    imgDigitFiles[40] = "img/d7_5";
-    imgDigitFiles[41] = "img/d7_6";
-    imgDigitFiles[42] = "img/d8_1";
-    imgDigitFiles[43] = "img/d8_2";
-    imgDigitFiles[44] = "img/d8_3";
-    imgDigitFiles[45] = "img/d8_4";
-    imgDigitFiles[46] = "img/d8_5";
-    imgDigitFiles[47] = "img/d8_6";
-    imgDigitFiles[48] = "img/d9_1";
-    imgDigitFiles[49] = "img/d9_2";
-    imgDigitFiles[50] = "img/d9_3";
-    imgDigitFiles[51] = "img/d9_4";
-    imgDigitFiles[52] = "img/d9_5";
-    imgDigitFiles[53] = "img/d9_6";
-    imgDigitFiles[54] = "img/d0_1";
-    imgDigitFiles[55] = "img/d0_2";
-    imgDigitFiles[56] = "img/d0_3";
-    imgDigitFiles[57] = "img/d0_4";
-    imgDigitFiles[58] = "img/d0_5";
-    imgDigitFiles[59] = "img/d0_6";
+    imgFiles[0]  = "img/d1_1.png";
+    imgFiles[1]  = "img/d1_2.png";
+    imgFiles[2]  = "img/d1_3.png";
+    imgFiles[3]  = "img/d1_4.png";
+    imgFiles[4]  = "img/d1_5.png";
+    imgFiles[5]  = "img/d1_6.png";
+    imgFiles[6]  = "img/d2_1.png";
+    imgFiles[7]  = "img/d2_2.png";
+    imgFiles[8]  = "img/d2_3.png";
+    imgFiles[9]  = "img/d2_4.png";
+    imgFiles[10] = "img/d2_5.png";
+    imgFiles[11] = "img/d2_6.png";
+    imgFiles[12] = "img/d3_1.png";
+    imgFiles[13] = "img/d3_2.png";
+    imgFiles[14] = "img/d3_3.png";
+    imgFiles[15] = "img/d3_4.png";
+    imgFiles[16] = "img/d3_5.png";
+    imgFiles[17] = "img/d3_6.png";
+    imgFiles[18] = "img/d4_1.png";
+    imgFiles[19] = "img/d4_2.png";
+    imgFiles[20] = "img/d4_3.png";
+    imgFiles[21] = "img/d4_4.png";
+    imgFiles[22] = "img/d4_5.png";
+    imgFiles[23] = "img/d4_6.png";
+    imgFiles[24] = "img/d5_1.png";
+    imgFiles[25] = "img/d5_2.png";
+    imgFiles[26] = "img/d5_3.png";
+    imgFiles[27] = "img/d5_4.png";
+    imgFiles[28] = "img/d5_5.png";
+    imgFiles[29] = "img/d5_6.png";
+    imgFiles[30] = "img/d6_1.png";
+    imgFiles[31] = "img/d6_2.png";
+    imgFiles[32] = "img/d6_3.png";
+    imgFiles[33] = "img/d6_4.png";
+    imgFiles[34] = "img/d6_5.png";
+    imgFiles[35] = "img/d6_6.png";
+    imgFiles[36] = "img/d7_1.png";
+    imgFiles[37] = "img/d7_2.png";
+    imgFiles[38] = "img/d7_3.png";
+    imgFiles[39] = "img/d7_4.png";
+    imgFiles[40] = "img/d7_5.png";
+    imgFiles[41] = "img/d7_6.png";
+    imgFiles[42] = "img/d8_1.png";
+    imgFiles[43] = "img/d8_2.png";
+    imgFiles[44] = "img/d8_3.png";
+    imgFiles[45] = "img/d8_4.png";
+    imgFiles[46] = "img/d8_5.png";
+    imgFiles[47] = "img/d8_6.png";
+    imgFiles[48] = "img/d9_1.png";
+    imgFiles[49] = "img/d9_2.png";
+    imgFiles[50] = "img/d9_3.png";
+    imgFiles[51] = "img/d9_4.png";
+    imgFiles[52] = "img/d9_5.png";
+    imgFiles[53] = "img/d9_6.png";
+    imgFiles[54] = "img/d0_1.png";
+    imgFiles[55] = "img/d0_2.png";
+    imgFiles[56] = "img/d0_3.png";
+    imgFiles[57] = "img/d0_4.png";
+    imgFiles[58] = "img/d0_5.png";
+    imgFiles[59] = "img/d0_6.png";
 }
 
 void TForm1::initWeights()
@@ -368,7 +450,7 @@ void TForm1::initWeights()
         {
             srand((cnt++ << 3) ^ 0x148BF269);
             val = rand() % 100;
-            P1_W1[i][k] = val / 10000.0;
+            P1_W1[i][k] = val / 100.0;
         }
     }
     for (i = 0; i < MN1_LEN; i++)
@@ -377,7 +459,7 @@ void TForm1::initWeights()
         {
             srand((cnt++ << 2) ^ 0x145BF369);
             val = rand() % 100;
-            P1_W2[i][k] = val / 10000.0;
+            P1_W2[i][k] = val / 100.0;
         }
     }
     for (i = 0; i < MN2_LEN; i++)
@@ -386,7 +468,7 @@ void TForm1::initWeights()
         {
             srand((cnt++ << 4) ^ 0x619BF269);
             val = rand() % 100;
-            P1_W3[i][k] = val / 10000.0;
+            P1_W3[i][k] = val / 100.0;
         }
     }
 }
@@ -1017,90 +1099,78 @@ void __fastcall TForm1::Button7Click(TObject *Sender)
     for (int cnt = 0; cnt < G_cycleQty; cnt++)
     {
 
-        if (!(cnt % 100))
-        {
+        if (!(cnt % 100)){
             lbl1->Caption = IntToStr(cnt);
             lb1->Items->Add("------------------------------------");
-            for (int i = 0; i < OUT_N_LEN; i++)
-            {
-                lb1->Items->Add(P1_deltaOutN[i]);
-            }
+            for (int i = 0; i < OUT_N_LEN; i++){
+                lb1->Items->Add(P1_deltaOutN[i]);}
+
             Application->ProcessMessages();
         }
 
-        if (G_stop)
+        if (G_stop){
+            G_stop = false;
             break;
-        for (int pattCnt = 0; pattCnt < PATT_QTY; ++pattCnt)
-        {
-            mf->matrixMul(P1_patt[pattCnt], M_ARR(IN_N_LEN, MN1_LEN, P1_W1), P1_mN1);
-            //    scaleArray(P1_mN1, MN1_LEN);
-            if (chk1->Checked)
-                mf->getSigmoid(P1_mN1, MN1_LEN, G_sigmoidTilt);
+        }
+        for (int pattCnt = 0; pattCnt < PATT_QTY; ++pattCnt){
+			mf->matrixMul(P1_patt[pattCnt], IN_N_LEN, MN1_LEN, P1_W1, P1_mN1);
+            normalizationData(P1_mN1, MN1_LEN);
+			if (chk1->Checked)
+				mf->getSigmoid(P1_mN1, MN1_LEN, G_sigmoidTilt);
 
-            mf->matrixMul(P1_mN1, M_ARR(MN1_LEN, MN2_LEN, P1_W2), P1_mN2);
-            //    scaleArray(P1_mN2, MN2_LEN);
-            if (chk2->Checked)
-                mf->getSigmoid(P1_mN2, MN2_LEN, G_sigmoidTilt);
+			mf->matrixMul(P1_mN1, MN1_LEN, MN2_LEN, P1_W2, P1_mN2);
+//			 normalizationData(P1_mN2, MN2_LEN);
+			if (chk2->Checked)
+				mf->getSigmoid(P1_mN2, MN2_LEN, G_sigmoidTilt);
 
-            mf->matrixMul(P1_mN2, M_ARR(MN2_LEN, OUT_N_LEN, P1_W3), P1_outN);
-            //    scaleArray(P1_outN, OUT_N_LEN);
-            if (chk3->Checked)
-                mf->getSigmoid(P1_outN, OUT_N_LEN, G_sigmoidTilt);
+			mf->matrixMul(P1_mN2, MN2_LEN, OUT_N_LEN, P1_W3, P1_outN);
+//			normalizationData(P1_outN, OUT_N_LEN);
+			if (chk3->Checked)
+				mf->getSigmoid(P1_outN, OUT_N_LEN, G_sigmoidTilt);
 
-            // delta last layer
-            for (int i = 0; i < OUT_N_LEN; ++i)
-            {
-                P1_deltaOutN[i] = (P1_outN[i] - P1_goal[pattCnt][i]);
-            }
+			// delta last layer
+			for (int i = 0; i < OUT_N_LEN; ++i){
+				P1_deltaOutN[i] = (P1_outN[i] - P1_goal[pattCnt][i]);}
 
-            // delta prep;
-            mf->matrixMul(M_ARR(MN2_LEN, OUT_N_LEN, P1_W3), P1_deltaOutN, P1_deltaMN2);
-            mf->matrixMul(M_ARR(MN1_LEN, MN2_LEN, P1_W2), P1_deltaMN2, P1_deltaMN1);
+			// delta prep;
+			mf->matrixMul(MN2_LEN, OUT_N_LEN, P1_W3, P1_deltaOutN, P1_deltaMN2);
+//            normalizationData(P1_deltaMN2, MN2_LEN);
+			mf->matrixMul(MN1_LEN, MN2_LEN, P1_W2, P1_deltaMN2, P1_deltaMN1);
+//			normalizationData(P1_deltaMN1, MN1_LEN);
 
-            for (int k = 0; k < IN_N_LEN; ++k)
-            {
-                for (int l = 0; l < MN1_LEN; ++l)
-                {
+			for (int k = 0; k < IN_N_LEN; ++k){
+                for (int l = 0; l < MN1_LEN; ++l){
                     P1_deltaW1[k][l] = P1_patt[pattCnt][k] * P1_deltaMN1[l];
                 }
+                // normalizationData(P1_deltaW1[k], MN1_LEN);
             }
-            for (int k = 0; k < MN1_LEN; ++k)
-            {
-                for (int l = 0; l < MN2_LEN; ++l)
-                {
+
+
+            for (int k = 0; k < MN1_LEN; ++k){
+                for (int l = 0; l < MN2_LEN; ++l){
                     P1_deltaW2[k][l] = P1_mN1[k] * P1_deltaMN2[l];
                 }
+                // normalizationData(P1_deltaW2[k], MN2_LEN);        
             }
-            for (int k = 0; k < MN2_LEN; ++k)
-            {
-                for (int l = 0; l < OUT_N_LEN; ++l)
-                {
+
+            for (int k = 0; k < MN2_LEN; ++k){
+                for (int l = 0; l < OUT_N_LEN; ++l){
                     P1_deltaW3[k][l] = P1_mN2[k] * P1_deltaOutN[l];
                 }
+                // normalizationData(P1_deltaW3[k], OUT_N_LEN);
             }
 
-            for (int i = 0; i < IN_N_LEN; ++i)
-            {
-                for (int k = 0; k < MN1_LEN; ++k)
-                {
-                    P1_W1[i][k] -= P1_deltaW1[i][k] * G_alfa;
-                }
-            }
+            for (int i = 0; i < IN_N_LEN; ++i){
+                for (int k = 0; k < MN1_LEN; ++k){
+                    P1_W1[i][k] -= P1_deltaW1[i][k] * G_alfa;}}
 
-            for (int i = 0; i < MN1_LEN; ++i)
-            {
-                for (int k = 0; k < MN2_LEN; ++k)
-                {
-                    P1_W2[i][k] -= P1_deltaW2[i][k] * G_alfa;
-                }
-            }
-            for (int i = 0; i < MN2_LEN; ++i)
-            {
-                for (int k = 0; k < OUT_N_LEN; ++k)
-                {
-                    P1_W3[i][k] -= P1_deltaW3[i][k] * G_alfa;
-                }
-            }
+            for (int i = 0; i < MN1_LEN; ++i){
+                for (int k = 0; k < MN2_LEN; ++k){
+                    P1_W2[i][k] -= P1_deltaW2[i][k] * G_alfa;}}
+
+            for (int i = 0; i < MN2_LEN; ++i){
+                for (int k = 0; k < OUT_N_LEN; ++k){
+                    P1_W3[i][k] -= P1_deltaW3[i][k] * G_alfa;}}
         }
     }
 }
@@ -1128,15 +1198,18 @@ void TForm1::testFunc(String flName)
     loadImgToSmallBitmap(flName, img1);
     loadSmallImgToArray(in);
 
-    mf->matrixMul(in, M_ARR(IN_N_LEN, MN1_LEN, P1_W1), n1);
+    mf->matrixMul(in, IN_N_LEN, MN1_LEN, P1_W1, n1);
+    normalizationData(n1, MN1_LEN);
     if (chk1->Checked)
         mf->getSigmoid(n1, MN1_LEN, G_sigmoidTilt);
 
-    mf->matrixMul(n1, M_ARR(MN1_LEN, MN2_LEN, P1_W2), n2);
-    if (chk2->Checked)
-        mf->getSigmoid(n2, MN2_LEN, G_sigmoidTilt);
+    mf->matrixMul(n1, MN1_LEN, MN2_LEN, P1_W2, n2);
+//	normalizationData(n2, MN2_LEN);
+	if (chk2->Checked)
+		mf->getSigmoid(n2, MN2_LEN, G_sigmoidTilt);
 
-    mf->matrixMul(n2, M_ARR(MN2_LEN, OUT_N_LEN, P1_W3), nGoal);
+	mf->matrixMul(n2, MN2_LEN, OUT_N_LEN, P1_W3, nGoal);
+//	normalizationData(nGoal, OUT_N_LEN);
     if (chk3->Checked)
         mf->getSigmoid(nGoal, OUT_N_LEN, G_sigmoidTilt);
 
@@ -1254,6 +1327,7 @@ void __fastcall TForm1::Button15Click(TObject *Sender)
     for (int i = 0; i < PATT_QTY; i++)
     {
         M_SET_ARR(P1_patt[i], -1, IN_N_LEN) 
+        M_SET_MATRIX(G_smallTmpImgArr1, -1, IMG_SMALL_H, IMG_SMALL_W)
         
         loadImgToBitmap(imgFiles[i], bigImg, IMG_BIG_H, IMG_BIG_W);
         loadBitmapToArray(bigImg, G_tmpImgArr1, IMG_BIG_H, IMG_BIG_W); 
@@ -1263,8 +1337,10 @@ void __fastcall TForm1::Button15Click(TObject *Sender)
         
         trimArray(G_tmpImgArr1, G_smallTmpImgArr1, MAX_IMG_SIZE,MAX_IMG_SIZE);
         moveImgInArray(G_smallTmpImgArr1, IMG_SMALL_H, IMG_POS_CENTER, &pos); 
-
-        M_COPY_MX_TO_ARR(G_smallTmpImgArr1,IMG_SMALL_H,IMG_SMALL_W,P1_patt[i])
+         
+		M_COPY_MX_TO_ARR(G_smallTmpImgArr1,IMG_SMALL_H,IMG_SMALL_W,P1_patt[i])
+		lbl1->Caption = i;
+		Application->ProcessMessages();
     }
     if (!err)
         edInfo->Text = "images was loaded to patterns";
@@ -1272,4 +1348,92 @@ void __fastcall TForm1::Button15Click(TObject *Sender)
     #undef MAX_IMG_SIZE
 }
 //---------------------------------------------------------------------------
+
+void __fastcall TForm1::Button16Click(TObject *Sender)
+{
+  int pattNum = StrToInt(edPattNum->Text);
+
+  M_GET_MATRIX(IMG_SMALL_H,IMG_SMALL_W,P1_patt[pattNum],G_smallTmpImgArr1);
+  showImgFromArray(img1,G_smallTmpImgArr1, IMG_SMALL_H, IMG_SMALL_W);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::btTestClick(TObject *Sender)
+{
+#define MAX_IMG_SIZE 24
+    
+    struct S_imgPos pos;
+    float scale;
+
+    float in[IN_N_LEN];
+    float n1[MN1_LEN];
+    float n2[MN2_LEN];
+    float nGoal[OUT_N_LEN];
+
+    M_RESET_ARR(n1, MN1_LEN)
+    M_RESET_ARR(n2, MN2_LEN)
+    M_RESET_ARR(nGoal, OUT_N_LEN)
+
+    M_SET_MATRIX(G_smallTmpImgArr1, -1, IMG_SMALL_H, IMG_SMALL_W)
+
+    loadImgToBitmap("testImg1.png", bigImg, IMG_BIG_H, IMG_BIG_W);
+    loadBitmapToArray(bigImg, G_tmpImgArr1, IMG_BIG_H, IMG_BIG_W); 
+    moveImgInArray(G_tmpImgArr1, IMG_BIG_H, IMG_POS_LEFT_TOP, &pos);	
+    scale = getScale(&pos, MAX_IMG_SIZE);
+    scaleImg(G_tmpImgArr1, MAX_IMG_SIZE, scale, pos.width, pos.height);
+    
+    trimArray(G_tmpImgArr1, G_smallTmpImgArr1, MAX_IMG_SIZE,MAX_IMG_SIZE);
+    moveImgInArray(G_smallTmpImgArr1, IMG_SMALL_H, IMG_POS_CENTER, &pos); 
+    showImgFromArray(img1,G_smallTmpImgArr1, IMG_SMALL_H, IMG_SMALL_W);
+    
+    M_COPY_MX_TO_ARR(G_smallTmpImgArr1,IMG_SMALL_H,IMG_SMALL_W,in)
+
+    mf->matrixMul(in, IN_N_LEN, MN1_LEN, P1_W1, n1);
+    normalizationData(n1, MN1_LEN);
+    if (chk1->Checked)
+        mf->getSigmoid(n1, MN1_LEN, G_sigmoidTilt);
+
+    mf->matrixMul(n1, MN1_LEN, MN2_LEN, P1_W2, n2);
+    if (chk2->Checked)
+        mf->getSigmoid(n2, MN2_LEN, G_sigmoidTilt);
+
+    mf->matrixMul(n2, MN2_LEN, OUT_N_LEN, P1_W3, nGoal);
+    if (chk3->Checked)
+        mf->getSigmoid(nGoal, OUT_N_LEN, G_sigmoidTilt);
+
+    edOut1->Text = FormatFloat("0.00000000", nGoal[0]);
+    edOut2->Text = FormatFloat("0.00000000", nGoal[1]);
+    edOut3->Text = FormatFloat("0.00000000", nGoal[2]);
+    edOut4->Text = FormatFloat("0.00000000", nGoal[3]);
+    edOut5->Text = FormatFloat("0.00000000", nGoal[4]);
+    edOut6->Text = FormatFloat("0.00000000", nGoal[5]);
+	edOut7->Text = FormatFloat("0.00000000", nGoal[6]);
+	#ifndef PATT_2
+	edOut8->Text = FormatFloat("0.00000000", nGoal[7]);
+	edOut9->Text = FormatFloat("0.00000000", nGoal[8]);
+	edOut10->Text = FormatFloat("0.00000000",nGoal[9]);
+	#endif
+
+#undef MAX_IMG_SIZE
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TForm1::normalizationData(float *dataArr, int len, float minRange, float maxRange)
+{
+    float min = 3.4e+38, max = -3.4e+38;
+    float range = maxRange - minRange;
+    float tmpArr[MX_ARR_LEN];
+    for(int i=0; i<len; i++){
+        if(dataArr[i]<min)min = dataArr[i];
+        if(dataArr[i]>max)max = dataArr[i];
+    }
+
+    for(int i=0; i<len; i++){
+        tmpArr[i] = ((dataArr[i]-min)/(max-min))*range + minRange;
+    }
+    for(int i=0; i<len; i++){
+        dataArr[i] = tmpArr[i];
+    }
+}
 

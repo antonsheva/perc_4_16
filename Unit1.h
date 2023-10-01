@@ -87,6 +87,7 @@ __published:	// IDE-managed Components
 	void __fastcall Button16Click(TObject *Sender);
 	void __fastcall btTestClick(TObject *Sender);
 
+
 private:    // User declarations
 public:		// User declarations
 	__fastcall TForm1(TComponent* Owner);
@@ -102,6 +103,7 @@ public:		// User declarations
 	};
 	
 
+    void __fastcall normalizationData(float *dataArr, int len, float minRange = -1, float maxRange = 1);
     void __fastcall trimArray(float **mx1, float **mx2, int w, int h);
     float __fastcall getScale(S_imgPos *pos, float size);
 

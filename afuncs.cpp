@@ -49,6 +49,7 @@ float AFuncs::getSigmoid(float arrX[], int len,  float  tilt, float bias)
   double tmp, tmp1, res;
   for (int var = 0; var < len; ++var) {
 	  tmp1 = -1.0*(arrX[var]+bias) * tilt;
+	  if(tmp1>32)tmp1 = 32;
 	  tmp = pow( 2.72, tmp1);  //-0.5
 	  tmp = (1/(1 + tmp));
 	  arrX[var] = tmp;
@@ -56,8 +57,6 @@ float AFuncs::getSigmoid(float arrX[], int len,  float  tilt, float bias)
   return res;
 }
 //-----------------------------------------------------------------------------------------------------
-
-
 
 // Multiplying matrixes
 bool AFuncs::matrixMul(int l1, int r1, int a1[], int l2, int r2, int a2[], int lRes, int rRes,  int result[])
@@ -196,13 +195,12 @@ void AFuncs::matrixMul( double arr[], int lns, int clmns, double serMx[],  doubl
 //--------------------------------------------------------------------------------------------------------
 
 // Multiplying an array by a matrix
-void AFuncs::matrixMul( double arr[], int lns, int clmns, double **serMx,  double result[])
+void AFuncs::matrixMul( double arr[], int lns, int clmns, double **mx,  double result[])
 {
-  
     M_RESET_ARR(result, clmns)
     for(int i=0; i < clmns; i++){
         for(int n=0; n < lns; n++){
-            result[i] += arr[n] * serMx[n][i];
+            result[i] += arr[n] * mx[n][i];
         }
     }
     return;
@@ -281,28 +279,24 @@ int AFuncs::arraysMul(double *arr1, double *arr2, int len)
     return res;
 }
 
-
-
-
-
-void AFuncs::matrixMul( float arr[], int lns, int clmns, float **serMx,  float result[])
+void AFuncs::matrixMul( float arr[], int lns, int clmns, float **mx,  float result[])
 {
     M_RESET_ARR(result, clmns)
 	for(int i=0; i < clmns; i++){
 		for(int n=0; n < lns; n++){
-			result[i] += arr[n] * serMx[n][i];
+			result[i] += arr[n] * mx[n][i];
 		}
 	}
 	return;
 }
 
 
-void AFuncs::matrixMul(int lns, int clmns, float **serMx,  float arr[],  float result[])
+void AFuncs::matrixMul(int lns, int clmns, float **mx,  float arr[],  float result[])
 {
 	M_RESET_ARR(result, clmns)
 	for(int i=0; i < lns; i++){
 		for(int n=0; n < clmns; n++){
-			result[i] += arr[n] * serMx[i][n];
+			result[i] += arr[n] * mx[i][n];
 		}
     }
     return;

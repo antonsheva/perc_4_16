@@ -76,11 +76,11 @@ public:
     int arraysMul(float *arr1, float *arr2, int len);
 	int arraysMul(double *arr1, double *arr2, int len);
 
-    void matrixMul(float arr[], int lns, int clmns, float **serMx, float result[]);
+    void matrixMul(float arr[], int lns, int clmns, float **mx, float result[]);
 
-    void matrixMul(int lns, int clmns, float **serMx, float arr[], float result[]);
+    void matrixMul(int lns, int clmns, float **mx, float arr[], float result[]);
 
-    void AFuncs::matrixMul( double arr[], int lns, int clmns, double **serMx,  double result[]);
+    void AFuncs::matrixMul( double arr[], int lns, int clmns, double **mx,  double result[]);
 
 private:
 
