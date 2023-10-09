@@ -15,7 +15,7 @@
 #pragma resource "*.dfm"
 TForm1 *Form1;
 
-#define PATT_2 1
+
 
 #define N0_LEN 4
 #define N1_LEN 10
@@ -57,140 +57,19 @@ float arrDeltaW3[N2_LEN][N_GOAL_LEN];
 
 
 
-#if     PATT_2
-#define PATT_QTY 60
-#define OUT_N_LEN 10
-float P1_goal[PATT_QTY][OUT_N_LEN] = {
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
- 
-    {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
- 
-    {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
- 
-    {0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
- 
-    {0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
- 
-    {0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
- 
-    {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
- 
-    {0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
- 
-    {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
- 
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{0, 0, 0, 0, 0, 0, 0, 0, 0, 1}
- 
-};
-#else
+#define PATT_FIGURES_7 0
+#define PATT_DIGITS_10 1
 
-#define OUT_N_LEN 7
-#define PATT_QTY 42
-float P1_goal[PATT_QTY][OUT_N_LEN] = {
-    {1, 0, 0, 0, 0, 0, 0},
-    {1, 0, 0, 0, 0, 0, 0},
-    {1, 0, 0, 0, 0, 0, 0},
-    {1, 0, 0, 0, 0, 0, 0},
-    {1, 0, 0, 0, 0, 0, 0},
-    {1, 0, 0, 0, 0, 0, 0},
 
-    {0, 1, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 0, 0, 0},
-
-    {0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 0},
-
-    {0, 0, 0, 1, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0},
-
-    {0, 0, 0, 0, 1, 0, 0},
-    {0, 0, 0, 0, 1, 0, 0},
-    {0, 0, 0, 0, 1, 0, 0},
-    {0, 0, 0, 0, 1, 0, 0},
-    {0, 0, 0, 0, 1, 0, 0},
-    {0, 0, 0, 0, 1, 0, 0},
-
-    {0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 1, 0},
-
-    {0, 0, 0, 0, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0, 1}
-
-};
-
+#if     PATT_DIGITS_10
+#include "patterns/PATT_DIGITS_10.cpp"
+#elif   PATT_FIGURES_7
+#include "patterns/PATT_FIGURES_7.cpp"
+#elif   PATT_ABVGD_33
+#include "patterns/PATT_ABVGD_33.cpp"
 #endif
 
-String imgFiles[PATT_QTY];
+
  
 
 float P1_patt[PATT_QTY][IN_N_LEN];
@@ -236,18 +115,13 @@ FILE *fl;
 __fastcall TForm1::TForm1(TComponent *Owner)
     : TForm(Owner)
 {
-    G_alfa = 0.001;
+    G_alfa = 0.0001;
     G_cycleQty = 10000;
-    G_sigmoidTilt = 25;
+    G_sigmoidTilt = 5;
 	G_stop = false;
 	G_scaleImg = 1;
 
-    
-    #if PATT_2
-    initImgDigits();
-    #else
-    initImgNameArray();
-    #endif
+    initNnParameters();
 
     initArrays();
     initWeights();
@@ -295,121 +169,9 @@ void TForm1::initArrays()
     
 }
 
-void TForm1::initImgNameArray()
-{
-    imgFiles[0] = "img/cross_1.png";
-    imgFiles[1] = "img/cross_2.png";
-    imgFiles[2] = "img/cross_3.png";
-    imgFiles[3] = "img/cross_4.png";
-    imgFiles[4] = "img/cross_5.png";
-    imgFiles[5] = "img/cross_6.png";
 
-    imgFiles[6] = "img/circle_1.png";
-    imgFiles[7] = "img/circle_2.png";
-    imgFiles[8] = "img/circle_3.png";
-    imgFiles[9] = "img/circle_4.png";
-    imgFiles[10] = "img/circle_5.png";
-    imgFiles[11] = "img/circle_6.png";
 
-    imgFiles[12] = "img/rctngl_1.png";
-    imgFiles[13] = "img/rctngl_2.png";
-    imgFiles[14] = "img/rctngl_3.png";
-    imgFiles[15] = "img/rctngl_4.png";
-    imgFiles[16] = "img/rctngl_5.png";
-    imgFiles[17] = "img/rctngl_6.png";
 
-    imgFiles[18] = "img/trngl1_1.png";
-    imgFiles[19] = "img/trngl1_2.png";
-    imgFiles[20] = "img/trngl1_3.png";
-    imgFiles[21] = "img/trngl1_4.png";
-    imgFiles[22] = "img/trngl1_5.png";
-    imgFiles[23] = "img/trngl1_6.png";
-
-    imgFiles[24] = "img/trngl2_1.png";
-    imgFiles[25] = "img/trngl2_2.png";
-    imgFiles[26] = "img/trngl2_3.png";
-    imgFiles[27] = "img/trngl2_4.png";
-    imgFiles[28] = "img/trngl2_5.png";
-    imgFiles[29] = "img/trngl2_6.png";
-
-    imgFiles[30] = "img/trngl3_1.png";
-    imgFiles[31] = "img/trngl3_2.png";
-    imgFiles[32] = "img/trngl3_3.png";
-    imgFiles[33] = "img/trngl3_4.png";
-    imgFiles[34] = "img/trngl3_5.png";
-    imgFiles[35] = "img/trngl3_6.png";
-
-    imgFiles[36] = "img/trngl4_1.png";
-    imgFiles[37] = "img/trngl4_2.png";
-    imgFiles[38] = "img/trngl4_3.png";
-    imgFiles[39] = "img/trngl4_4.png";
-    imgFiles[40] = "img/trngl4_5.png";
-    imgFiles[41] = "img/trngl4_6.png";
-}
-
-void TForm1::initImgDigits()
-{
-    imgFiles[0]  = "img/d1_1.png";
-    imgFiles[1]  = "img/d1_2.png";
-    imgFiles[2]  = "img/d1_3.png";
-    imgFiles[3]  = "img/d1_4.png";
-    imgFiles[4]  = "img/d1_5.png";
-    imgFiles[5]  = "img/d1_6.png";
-    imgFiles[6]  = "img/d2_1.png";
-    imgFiles[7]  = "img/d2_2.png";
-    imgFiles[8]  = "img/d2_3.png";
-    imgFiles[9]  = "img/d2_4.png";
-    imgFiles[10] = "img/d2_5.png";
-    imgFiles[11] = "img/d2_6.png";
-    imgFiles[12] = "img/d3_1.png";
-    imgFiles[13] = "img/d3_2.png";
-    imgFiles[14] = "img/d3_3.png";
-    imgFiles[15] = "img/d3_4.png";
-    imgFiles[16] = "img/d3_5.png";
-    imgFiles[17] = "img/d3_6.png";
-    imgFiles[18] = "img/d4_1.png";
-    imgFiles[19] = "img/d4_2.png";
-    imgFiles[20] = "img/d4_3.png";
-    imgFiles[21] = "img/d4_4.png";
-    imgFiles[22] = "img/d4_5.png";
-    imgFiles[23] = "img/d4_6.png";
-    imgFiles[24] = "img/d5_1.png";
-    imgFiles[25] = "img/d5_2.png";
-    imgFiles[26] = "img/d5_3.png";
-    imgFiles[27] = "img/d5_4.png";
-    imgFiles[28] = "img/d5_5.png";
-    imgFiles[29] = "img/d5_6.png";
-    imgFiles[30] = "img/d6_1.png";
-    imgFiles[31] = "img/d6_2.png";
-    imgFiles[32] = "img/d6_3.png";
-    imgFiles[33] = "img/d6_4.png";
-    imgFiles[34] = "img/d6_5.png";
-    imgFiles[35] = "img/d6_6.png";
-    imgFiles[36] = "img/d7_1.png";
-    imgFiles[37] = "img/d7_2.png";
-    imgFiles[38] = "img/d7_3.png";
-    imgFiles[39] = "img/d7_4.png";
-    imgFiles[40] = "img/d7_5.png";
-    imgFiles[41] = "img/d7_6.png";
-    imgFiles[42] = "img/d8_1.png";
-    imgFiles[43] = "img/d8_2.png";
-    imgFiles[44] = "img/d8_3.png";
-    imgFiles[45] = "img/d8_4.png";
-    imgFiles[46] = "img/d8_5.png";
-    imgFiles[47] = "img/d8_6.png";
-    imgFiles[48] = "img/d9_1.png";
-    imgFiles[49] = "img/d9_2.png";
-    imgFiles[50] = "img/d9_3.png";
-    imgFiles[51] = "img/d9_4.png";
-    imgFiles[52] = "img/d9_5.png";
-    imgFiles[53] = "img/d9_6.png";
-    imgFiles[54] = "img/d0_1.png";
-    imgFiles[55] = "img/d0_2.png";
-    imgFiles[56] = "img/d0_3.png";
-    imgFiles[57] = "img/d0_4.png";
-    imgFiles[58] = "img/d0_5.png";
-    imgFiles[59] = "img/d0_6.png";
-}
 
 void TForm1::initWeights()
 {
@@ -1401,18 +1163,7 @@ void __fastcall TForm1::btTestClick(TObject *Sender)
     if (chk3->Checked)
         mf->getSigmoid(nGoal, OUT_N_LEN, G_sigmoidTilt);
 
-    edOut1->Text = FormatFloat("0.00000000", nGoal[0]);
-    edOut2->Text = FormatFloat("0.00000000", nGoal[1]);
-    edOut3->Text = FormatFloat("0.00000000", nGoal[2]);
-    edOut4->Text = FormatFloat("0.00000000", nGoal[3]);
-    edOut5->Text = FormatFloat("0.00000000", nGoal[4]);
-    edOut6->Text = FormatFloat("0.00000000", nGoal[5]);
-	edOut7->Text = FormatFloat("0.00000000", nGoal[6]);
-	#if PATT_2
-	edOut8->Text = FormatFloat("0.00000000", nGoal[7]);
-	edOut9->Text = FormatFloat("0.00000000", nGoal[8]);
-	edOut10->Text = FormatFloat("0.00000000",nGoal[9]);
-	#endif
+	showResult(nGoal);
 
 #undef MAX_IMG_SIZE
 }

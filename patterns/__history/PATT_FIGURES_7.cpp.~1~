@@ -1,0 +1,113 @@
+#include "Unit1.h"
+
+#define OUT_N_LEN 7
+#define PATT_QTY 42
+float P1_goal[PATT_QTY][OUT_N_LEN] = {
+    {1, 0, 0, 0, 0, 0, 0},
+    {1, 0, 0, 0, 0, 0, 0},
+    {1, 0, 0, 0, 0, 0, 0},
+    {1, 0, 0, 0, 0, 0, 0},
+    {1, 0, 0, 0, 0, 0, 0},
+    {1, 0, 0, 0, 0, 0, 0},
+
+    {0, 1, 0, 0, 0, 0, 0},
+    {0, 1, 0, 0, 0, 0, 0},
+    {0, 1, 0, 0, 0, 0, 0},
+    {0, 1, 0, 0, 0, 0, 0},
+    {0, 1, 0, 0, 0, 0, 0},
+    {0, 1, 0, 0, 0, 0, 0},
+
+    {0, 0, 1, 0, 0, 0, 0},
+    {0, 0, 1, 0, 0, 0, 0},
+    {0, 0, 1, 0, 0, 0, 0},
+    {0, 0, 1, 0, 0, 0, 0},
+    {0, 0, 1, 0, 0, 0, 0},
+    {0, 0, 1, 0, 0, 0, 0},
+
+    {0, 0, 0, 1, 0, 0, 0},
+    {0, 0, 0, 1, 0, 0, 0},
+    {0, 0, 0, 1, 0, 0, 0},
+    {0, 0, 0, 1, 0, 0, 0},
+    {0, 0, 0, 1, 0, 0, 0},
+    {0, 0, 0, 1, 0, 0, 0},
+
+    {0, 0, 0, 0, 1, 0, 0},
+    {0, 0, 0, 0, 1, 0, 0},
+    {0, 0, 0, 0, 1, 0, 0},
+    {0, 0, 0, 0, 1, 0, 0},
+    {0, 0, 0, 0, 1, 0, 0},
+    {0, 0, 0, 0, 1, 0, 0},
+
+    {0, 0, 0, 0, 0, 1, 0},
+    {0, 0, 0, 0, 0, 1, 0},
+    {0, 0, 0, 0, 0, 1, 0},
+    {0, 0, 0, 0, 0, 1, 0},
+    {0, 0, 0, 0, 0, 1, 0},
+    {0, 0, 0, 0, 0, 1, 0},
+
+    {0, 0, 0, 0, 0, 0, 1},
+    {0, 0, 0, 0, 0, 0, 1},
+    {0, 0, 0, 0, 0, 0, 1},
+    {0, 0, 0, 0, 0, 0, 1},
+    {0, 0, 0, 0, 0, 0, 1},
+    {0, 0, 0, 0, 0, 0, 1}
+
+};
+void TForm1::initNnParameters()
+{
+
+    G_sigmoidTilt = 25;
+    edSigmoid->Text = "25";
+
+    G_alfa = 0.001;
+    edAlfa->Text = "0,001";
+
+    imgFiles[0] = "img/cross_1.png";
+    imgFiles[1] = "img/cross_2.png";
+    imgFiles[2] = "img/cross_3.png";
+    imgFiles[3] = "img/cross_4.png";
+    imgFiles[4] = "img/cross_5.png";
+    imgFiles[5] = "img/cross_6.png";
+
+    imgFiles[6] = "img/circle_1.png";
+    imgFiles[7] = "img/circle_2.png";
+    imgFiles[8] = "img/circle_3.png";
+    imgFiles[9] = "img/circle_4.png";
+    imgFiles[10] = "img/circle_5.png";
+    imgFiles[11] = "img/circle_6.png";
+
+    imgFiles[12] = "img/rctngl_1.png";
+    imgFiles[13] = "img/rctngl_2.png";
+    imgFiles[14] = "img/rctngl_3.png";
+    imgFiles[15] = "img/rctngl_4.png";
+    imgFiles[16] = "img/rctngl_5.png";
+    imgFiles[17] = "img/rctngl_6.png";
+
+    imgFiles[18] = "img/trngl1_1.png";
+    imgFiles[19] = "img/trngl1_2.png";
+    imgFiles[20] = "img/trngl1_3.png";
+    imgFiles[21] = "img/trngl1_4.png";
+    imgFiles[22] = "img/trngl1_5.png";
+    imgFiles[23] = "img/trngl1_6.png";
+
+    imgFiles[24] = "img/trngl2_1.png";
+    imgFiles[25] = "img/trngl2_2.png";
+    imgFiles[26] = "img/trngl2_3.png";
+    imgFiles[27] = "img/trngl2_4.png";
+    imgFiles[28] = "img/trngl2_5.png";
+    imgFiles[29] = "img/trngl2_6.png";
+
+    imgFiles[30] = "img/trngl3_1.png";
+    imgFiles[31] = "img/trngl3_2.png";
+    imgFiles[32] = "img/trngl3_3.png";
+    imgFiles[33] = "img/trngl3_4.png";
+    imgFiles[34] = "img/trngl3_5.png";
+    imgFiles[35] = "img/trngl3_6.png";
+
+    imgFiles[36] = "img/trngl4_1.png";
+    imgFiles[37] = "img/trngl4_2.png";
+    imgFiles[38] = "img/trngl4_3.png";
+    imgFiles[39] = "img/trngl4_4.png";
+    imgFiles[40] = "img/trngl4_5.png";
+    imgFiles[41] = "img/trngl4_6.png";
+}

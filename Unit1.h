@@ -110,8 +110,8 @@ public:		// User declarations
     void TForm1::scaleArray(float *arr, int len);
 	void initArrays();
     void testFunc(String flName);
-    void TForm1::initImgNameArray();
-    void initImgDigits();
+    void initNnParameters();
+	void showResult(float *nGoal);
     void showImgFromArray(TImage *img, float **arr, int w=140, int h=140);
     void TForm1::loadPattFromFiles();
     void TForm1::getValFromFile(BYTE *val, int *meta, int pos = -1);

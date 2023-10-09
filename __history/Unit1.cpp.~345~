@@ -15,6 +15,8 @@
 #pragma resource "*.dfm"
 TForm1 *Form1;
 
+
+
 #define N0_LEN 4
 #define N1_LEN 10
 #define N2_LEN 10
@@ -52,68 +54,27 @@ float arrDeltaW3[N2_LEN][N_GOAL_LEN];
 #define IN_N_LEN 784
 #define MN1_LEN 16
 #define MN2_LEN 16
-#define OUT_N_LEN 7
-#define PATT_QTY 42
 
-#define DIG_PATT_QTY 60
 
-float P1_goal[PATT_QTY][OUT_N_LEN] = {
-    {1, 0, 0, 0, 0, 0, 0},
-    {1, 0, 0, 0, 0, 0, 0},
-    {1, 0, 0, 0, 0, 0, 0},
-    {1, 0, 0, 0, 0, 0, 0},
-    {1, 0, 0, 0, 0, 0, 0},
-    {1, 0, 0, 0, 0, 0, 0},
 
-    {0, 1, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 0, 0, 0},
+#define PATT_FIGURES_7 0
+#define PATT_DIGITS_10 1
 
-    {0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 0},
 
-    {0, 0, 0, 1, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0},
+#if     PATT_DIGITS_10
+#include "patterns/PATT_DIGITS_10.cpp"
+#elif   PATT_FIGURES_7
+#include "patterns/PATT_FIGURES_7.cpp"
+#elif   PATT_ABVGD_33
+#include "patterns/PATT_ABVGD_33.cpp"
+#endif
 
-    {0, 0, 0, 0, 1, 0, 0},
-    {0, 0, 0, 0, 1, 0, 0},
-    {0, 0, 0, 0, 1, 0, 0},
-    {0, 0, 0, 0, 1, 0, 0},
-    {0, 0, 0, 0, 1, 0, 0},
-    {0, 0, 0, 0, 1, 0, 0},
 
-    {0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 1, 0},
-
-    {0, 0, 0, 0, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0, 1}
-
-};
-
-String imgFiles[PATT_QTY];
-String imgDigitFiles[DIG_PATT_QTY];
+ 
 
 float P1_patt[PATT_QTY][IN_N_LEN];
 // float **P1_patt;
+
 
 float P1_inN[IN_N_LEN];
 float P1_mN1[MN1_LEN];
@@ -154,13 +115,14 @@ FILE *fl;
 __fastcall TForm1::TForm1(TComponent *Owner)
     : TForm(Owner)
 {
-    G_alfa = 0.001;
+    G_alfa = 0.0001;
     G_cycleQty = 10000;
-    G_sigmoidTilt = 25;
+    G_sigmoidTilt = 5;
 	G_stop = false;
 	G_scaleImg = 1;
 
-    initImgNameArray();
+    initNnParameters();
+
     initArrays();
     initWeights();
 }
@@ -207,121 +169,9 @@ void TForm1::initArrays()
     
 }
 
-void TForm1::initImgNameArray()
-{
-    imgFiles[0] = "img/cross_1.png";
-    imgFiles[1] = "img/cross_2.png";
-    imgFiles[2] = "img/cross_3.png";
-    imgFiles[3] = "img/cross_4.png";
-    imgFiles[4] = "img/cross_5.png";
-    imgFiles[5] = "img/cross_6.png";
 
-    imgFiles[6] = "img/circle_1.png";
-    imgFiles[7] = "img/circle_2.png";
-    imgFiles[8] = "img/circle_3.png";
-    imgFiles[9] = "img/circle_4.png";
-    imgFiles[10] = "img/circle_5.png";
-    imgFiles[11] = "img/circle_6.png";
 
-    imgFiles[12] = "img/rctngl_1.png";
-    imgFiles[13] = "img/rctngl_2.png";
-    imgFiles[14] = "img/rctngl_3.png";
-    imgFiles[15] = "img/rctngl_4.png";
-    imgFiles[16] = "img/rctngl_5.png";
-    imgFiles[17] = "img/rctngl_6.png";
 
-    imgFiles[18] = "img/trngl1_1.png";
-    imgFiles[19] = "img/trngl1_2.png";
-    imgFiles[20] = "img/trngl1_3.png";
-    imgFiles[21] = "img/trngl1_4.png";
-    imgFiles[22] = "img/trngl1_5.png";
-    imgFiles[23] = "img/trngl1_6.png";
-
-    imgFiles[24] = "img/trngl2_1.png";
-    imgFiles[25] = "img/trngl2_2.png";
-    imgFiles[26] = "img/trngl2_3.png";
-    imgFiles[27] = "img/trngl2_4.png";
-    imgFiles[28] = "img/trngl2_5.png";
-    imgFiles[29] = "img/trngl2_6.png";
-
-    imgFiles[30] = "img/trngl3_1.png";
-    imgFiles[31] = "img/trngl3_2.png";
-    imgFiles[32] = "img/trngl3_3.png";
-    imgFiles[33] = "img/trngl3_4.png";
-    imgFiles[34] = "img/trngl3_5.png";
-    imgFiles[35] = "img/trngl3_6.png";
-
-    imgFiles[36] = "img/trngl4_1.png";
-    imgFiles[37] = "img/trngl4_2.png";
-    imgFiles[38] = "img/trngl4_3.png";
-    imgFiles[39] = "img/trngl4_4.png";
-    imgFiles[40] = "img/trngl4_5.png";
-    imgFiles[41] = "img/trngl4_6.png";
-}
-
-void TForm1::initImgDigits()
-{
-    imgDigitFiles[0] = "img/d1_1";
-    imgDigitFiles[1] = "img/d1_2";
-    imgDigitFiles[2] = "img/d1_3";
-    imgDigitFiles[3] = "img/d1_4";
-    imgDigitFiles[4] = "img/d1_5";
-    imgDigitFiles[5] = "img/d1_6";
-    imgDigitFiles[6] = "img/d2_1";
-    imgDigitFiles[7] = "img/d2_2";
-    imgDigitFiles[8] = "img/d2_3";
-    imgDigitFiles[9] = "img/d2_4";
-    imgDigitFiles[10] = "img/d2_5";
-    imgDigitFiles[11] = "img/d2_6";
-    imgDigitFiles[12] = "img/d3_1";
-    imgDigitFiles[13] = "img/d3_2";
-    imgDigitFiles[14] = "img/d3_3";
-    imgDigitFiles[15] = "img/d3_4";
-    imgDigitFiles[16] = "img/d3_5";
-    imgDigitFiles[17] = "img/d3_6";
-    imgDigitFiles[18] = "img/d4_1";
-    imgDigitFiles[19] = "img/d4_2";
-    imgDigitFiles[20] = "img/d4_3";
-    imgDigitFiles[21] = "img/d4_4";
-    imgDigitFiles[22] = "img/d4_5";
-    imgDigitFiles[23] = "img/d4_6";
-    imgDigitFiles[24] = "img/d5_1";
-    imgDigitFiles[25] = "img/d5_2";
-    imgDigitFiles[26] = "img/d5_3";
-    imgDigitFiles[27] = "img/d5_4";
-    imgDigitFiles[28] = "img/d5_5";
-    imgDigitFiles[29] = "img/d5_6";
-    imgDigitFiles[30] = "img/d6_1";
-    imgDigitFiles[31] = "img/d6_2";
-    imgDigitFiles[32] = "img/d6_3";
-    imgDigitFiles[33] = "img/d6_4";
-    imgDigitFiles[34] = "img/d6_5";
-    imgDigitFiles[35] = "img/d6_6";
-    imgDigitFiles[36] = "img/d7_1";
-    imgDigitFiles[37] = "img/d7_2";
-    imgDigitFiles[38] = "img/d7_3";
-    imgDigitFiles[39] = "img/d7_4";
-    imgDigitFiles[40] = "img/d7_5";
-    imgDigitFiles[41] = "img/d7_6";
-    imgDigitFiles[42] = "img/d8_1";
-    imgDigitFiles[43] = "img/d8_2";
-    imgDigitFiles[44] = "img/d8_3";
-    imgDigitFiles[45] = "img/d8_4";
-    imgDigitFiles[46] = "img/d8_5";
-    imgDigitFiles[47] = "img/d8_6";
-    imgDigitFiles[48] = "img/d9_1";
-    imgDigitFiles[49] = "img/d9_2";
-    imgDigitFiles[50] = "img/d9_3";
-    imgDigitFiles[51] = "img/d9_4";
-    imgDigitFiles[52] = "img/d9_5";
-    imgDigitFiles[53] = "img/d9_6";
-    imgDigitFiles[54] = "img/d0_1";
-    imgDigitFiles[55] = "img/d0_2";
-    imgDigitFiles[56] = "img/d0_3";
-    imgDigitFiles[57] = "img/d0_4";
-    imgDigitFiles[58] = "img/d0_5";
-    imgDigitFiles[59] = "img/d0_6";
-}
 
 void TForm1::initWeights()
 {
@@ -1020,7 +870,10 @@ void __fastcall TForm1::Button7Click(TObject *Sender)
             Application->ProcessMessages();
         }
 
-        if (G_stop) break;
+        if (G_stop){
+            G_stop = false;
+            break;
+        }
         for (int pattCnt = 0; pattCnt < PATT_QTY; ++pattCnt){
 			mf->matrixMul(P1_patt[pattCnt], IN_N_LEN, MN1_LEN, P1_W1, P1_mN1);
             normalizationData(P1_mN1, MN1_LEN);
@@ -1028,34 +881,46 @@ void __fastcall TForm1::Button7Click(TObject *Sender)
 				mf->getSigmoid(P1_mN1, MN1_LEN, G_sigmoidTilt);
 
 			mf->matrixMul(P1_mN1, MN1_LEN, MN2_LEN, P1_W2, P1_mN2);
-			// normalizationData(P1_mN2, MN2_LEN);
+//			 normalizationData(P1_mN2, MN2_LEN);
 			if (chk2->Checked)
 				mf->getSigmoid(P1_mN2, MN2_LEN, G_sigmoidTilt);
 
 			mf->matrixMul(P1_mN2, MN2_LEN, OUT_N_LEN, P1_W3, P1_outN);
-        //    normalizationData(P1_outN, OUT_N_LEN);
+//			normalizationData(P1_outN, OUT_N_LEN);
 			if (chk3->Checked)
 				mf->getSigmoid(P1_outN, OUT_N_LEN, G_sigmoidTilt);
 
-            // delta last layer
-            for (int i = 0; i < OUT_N_LEN; ++i){
-                P1_deltaOutN[i] = (P1_outN[i] - P1_goal[pattCnt][i]);}
+			// delta last layer
+			for (int i = 0; i < OUT_N_LEN; ++i){
+				P1_deltaOutN[i] = (P1_outN[i] - P1_goal[pattCnt][i]);}
 
-            // delta prep;
-            mf->matrixMul(MN2_LEN, OUT_N_LEN, P1_W3, P1_deltaOutN, P1_deltaMN2);
-            mf->matrixMul(MN1_LEN, MN2_LEN, P1_W2, P1_deltaMN2, P1_deltaMN1);
+			// delta prep;
+			mf->matrixMul(MN2_LEN, OUT_N_LEN, P1_W3, P1_deltaOutN, P1_deltaMN2);
+//            normalizationData(P1_deltaMN2, MN2_LEN);
+			mf->matrixMul(MN1_LEN, MN2_LEN, P1_W2, P1_deltaMN2, P1_deltaMN1);
+//			normalizationData(P1_deltaMN1, MN1_LEN);
 
-            for (int k = 0; k < IN_N_LEN; ++k){
+			for (int k = 0; k < IN_N_LEN; ++k){
                 for (int l = 0; l < MN1_LEN; ++l){
-                    P1_deltaW1[k][l] = P1_patt[pattCnt][k] * P1_deltaMN1[l];}}
+                    P1_deltaW1[k][l] = P1_patt[pattCnt][k] * P1_deltaMN1[l];
+                }
+                // normalizationData(P1_deltaW1[k], MN1_LEN);
+            }
+
 
             for (int k = 0; k < MN1_LEN; ++k){
                 for (int l = 0; l < MN2_LEN; ++l){
-                    P1_deltaW2[k][l] = P1_mN1[k] * P1_deltaMN2[l];}}
+                    P1_deltaW2[k][l] = P1_mN1[k] * P1_deltaMN2[l];
+                }
+                // normalizationData(P1_deltaW2[k], MN2_LEN);        
+            }
 
             for (int k = 0; k < MN2_LEN; ++k){
                 for (int l = 0; l < OUT_N_LEN; ++l){
-                    P1_deltaW3[k][l] = P1_mN2[k] * P1_deltaOutN[l];}}
+                    P1_deltaW3[k][l] = P1_mN2[k] * P1_deltaOutN[l];
+                }
+                // normalizationData(P1_deltaW3[k], OUT_N_LEN);
+            }
 
             for (int i = 0; i < IN_N_LEN; ++i){
                 for (int k = 0; k < MN1_LEN; ++k){
@@ -1101,12 +966,12 @@ void TForm1::testFunc(String flName)
         mf->getSigmoid(n1, MN1_LEN, G_sigmoidTilt);
 
     mf->matrixMul(n1, MN1_LEN, MN2_LEN, P1_W2, n2);
-    // normalizationData(n2, MN2_LEN);
-    if (chk2->Checked)
-        mf->getSigmoid(n2, MN2_LEN, G_sigmoidTilt);
+//	normalizationData(n2, MN2_LEN);
+	if (chk2->Checked)
+		mf->getSigmoid(n2, MN2_LEN, G_sigmoidTilt);
 
-    mf->matrixMul(n2, MN2_LEN, OUT_N_LEN, P1_W3, nGoal);
-    // normalizationData(nGoal, OUT_N_LEN);
+	mf->matrixMul(n2, MN2_LEN, OUT_N_LEN, P1_W3, nGoal);
+//	normalizationData(nGoal, OUT_N_LEN);
     if (chk3->Checked)
         mf->getSigmoid(nGoal, OUT_N_LEN, G_sigmoidTilt);
 
@@ -1298,16 +1163,7 @@ void __fastcall TForm1::btTestClick(TObject *Sender)
     if (chk3->Checked)
         mf->getSigmoid(nGoal, OUT_N_LEN, G_sigmoidTilt);
 
-    edOut1->Text = FormatFloat("0.00000000", nGoal[0]);
-    edOut2->Text = FormatFloat("0.00000000", nGoal[1]);
-    edOut3->Text = FormatFloat("0.00000000", nGoal[2]);
-    edOut4->Text = FormatFloat("0.00000000", nGoal[3]);
-    edOut5->Text = FormatFloat("0.00000000", nGoal[4]);
-    edOut6->Text = FormatFloat("0.00000000", nGoal[5]);
-    edOut7->Text = FormatFloat("0.00000000", nGoal[6]);
-    edOut8->Text = FormatFloat("0.00000000", -11);
-    edOut9->Text = FormatFloat("0.00000000", -11);
-    edOut10->Text = FormatFloat("0.00000000", -11);
+    showResult(); 
 
 #undef MAX_IMG_SIZE
 }
