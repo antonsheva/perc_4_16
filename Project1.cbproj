@@ -62,36 +62,42 @@
 			<ILINK_TranslatedLibraryPath>$(BDS)\lib\$(LANGDIR)\release;$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="Project1.cpp">
-				<BuildOrder>0</BuildOrder>
-			</CppCompile>
-			<ResFiles Include="Project1.res">
-				<BuildOrder>1</BuildOrder>
-			</ResFiles>
-			<CppCompile Include="Unit1.cpp">
-				<Form>Form1</Form>
-				<DependentOn>Unit1.h</DependentOn>
-				<BuildOrder>2</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="a_macro.cpp">
-				<BuildOrder>3</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="afuncs.cpp">
-				<BuildOrder>4</BuildOrder>
-			</CppCompile>
 			<None Include="afuncs.h">
 				<BuildOrder>5</BuildOrder>
 			</None>
-			<None Include="GlobalVar.h">
-				<BuildOrder>6</BuildOrder>
-			</None>
+			<CppCompile Include="afuncs.cpp">
+				<BuildOrder>4</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="Unit2.cpp">
 				<Form>Form2</Form>
 				<DependentOn>Unit2.h</DependentOn>
 				<BuildOrder>7</BuildOrder>
 			</CppCompile>
-			<FormResources Include="Unit1.dfm"/>
+			<None Include="GlobalVar.h">
+				<BuildOrder>6</BuildOrder>
+			</None>
+			<ResFiles Include="Project1.res">
+				<BuildOrder>1</BuildOrder>
+			</ResFiles>
+			<CppCompile Include="Project1.cpp">
+				<BuildOrder>0</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="a_macro.cpp">
+				<BuildOrder>3</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="Unit1.cpp">
+				<Form>Form1</Form>
+				<DependentOn>Unit1.h</DependentOn>
+				<BuildOrder>2</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="Unit3.cpp">
+				<Form>Form3</Form>
+				<DependentOn>Unit3.h</DependentOn>
+				<BuildOrder>8</BuildOrder>
+			</CppCompile>
 			<FormResources Include="Unit2.dfm"/>
+			<FormResources Include="Unit1.dfm"/>
+			<FormResources Include="Unit3.dfm"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>

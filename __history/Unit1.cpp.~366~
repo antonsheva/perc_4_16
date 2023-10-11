@@ -15,7 +15,7 @@
 #pragma resource "*.dfm"
 TForm1 *Form1;
 
-#define PATT_2 1
+
 
 #define N0_LEN 4
 #define N1_LEN 10
@@ -57,144 +57,25 @@ float arrDeltaW3[N2_LEN][N_GOAL_LEN];
 
 
 
-#if     PATT_2
-#define PATT_QTY 60
-#define OUT_N_LEN 10
-float P1_goal[PATT_QTY][OUT_N_LEN] = {
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
- 
-    {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
- 
-    {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
- 
-    {0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
- 
-    {0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-    {0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
- 
-    {0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
- 
-    {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
-    {0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
- 
-    {0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-    {0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
- 
-    {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
- 
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
- 
-}
-#else
-#define OUT_N_LEN 7
-#define PATT_QTY 42
-float P1_goal[PATT_QTY][OUT_N_LEN] = {
-    {1, 0, 0, 0, 0, 0, 0},
-    {1, 0, 0, 0, 0, 0, 0},
-    {1, 0, 0, 0, 0, 0, 0},
-    {1, 0, 0, 0, 0, 0, 0},
-    {1, 0, 0, 0, 0, 0, 0},
-    {1, 0, 0, 0, 0, 0, 0},
+#define PATT_FIGURES_7 0
+#define PATT_DIGITS_10 1
 
-    {0, 1, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 0, 0, 0},
-    {0, 1, 0, 0, 0, 0, 0},
 
-    {0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 0},
-    {0, 0, 1, 0, 0, 0, 0},
-
-    {0, 0, 0, 1, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0},
-    {0, 0, 0, 1, 0, 0, 0},
-
-    {0, 0, 0, 0, 1, 0, 0},
-    {0, 0, 0, 0, 1, 0, 0},
-    {0, 0, 0, 0, 1, 0, 0},
-    {0, 0, 0, 0, 1, 0, 0},
-    {0, 0, 0, 0, 1, 0, 0},
-    {0, 0, 0, 0, 1, 0, 0},
-
-    {0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 1, 0},
-    {0, 0, 0, 0, 0, 1, 0},
-
-    {0, 0, 0, 0, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0, 1}
-
-};
-
+#if     PATT_DIGITS_10
+#include "patterns/PATT_DIGITS_10.cpp"
+#elif   PATT_FIGURES_7
+#include "patterns/PATT_FIGURES_7.cpp"
+#elif   PATT_ABVGD_33
+#include "patterns/PATT_ABVGD_33.cpp"
 #endif
 
-
+#define SHEET_H 100
+#define SHEET_W 100
  
 
 float P1_patt[PATT_QTY][IN_N_LEN];
 // float **P1_patt;
-String imgFiles[PATT_QTY];
+
 
 float P1_inN[IN_N_LEN];
 float P1_mN1[MN1_LEN];
@@ -225,7 +106,7 @@ float **G_tmpImgArr2;
 float **G_smallTmpImgArr1;
 float **G_smallTmpImgArr2;
 
-
+float **G_imgSheetArr;
 
 
 AFuncs *mf;
@@ -235,18 +116,13 @@ FILE *fl;
 __fastcall TForm1::TForm1(TComponent *Owner)
     : TForm(Owner)
 {
-    G_alfa = 0.001;
+    G_alfa = 0.0001;
     G_cycleQty = 10000;
-    G_sigmoidTilt = 25;
+    G_sigmoidTilt = 5;
 	G_stop = false;
 	G_scaleImg = 1;
 
-    
-    #if PATT_2
-    initImgDigits();
-    #else
-    initImgNameArray();
-    #endif
+    initNnParameters();
 
     initArrays();
     initWeights();
@@ -291,124 +167,15 @@ void TForm1::initArrays()
         G_smallTmpImgArr2[i] = new float[IMG_SMALL_H];
     }
 
-    
+    G_imgSheetArr = new float *[SHEET_W];
+    for (int i = 0; i < SHEET_H; i++){
+        G_imgSheetArr[i] = new float[SHEET_H];
+    }   
 }
 
-void TForm1::initImgNameArray()
-{
-    imgFiles[0] = "img/cross_1.png";
-    imgFiles[1] = "img/cross_2.png";
-    imgFiles[2] = "img/cross_3.png";
-    imgFiles[3] = "img/cross_4.png";
-    imgFiles[4] = "img/cross_5.png";
-    imgFiles[5] = "img/cross_6.png";
 
-    imgFiles[6] = "img/circle_1.png";
-    imgFiles[7] = "img/circle_2.png";
-    imgFiles[8] = "img/circle_3.png";
-    imgFiles[9] = "img/circle_4.png";
-    imgFiles[10] = "img/circle_5.png";
-    imgFiles[11] = "img/circle_6.png";
 
-    imgFiles[12] = "img/rctngl_1.png";
-    imgFiles[13] = "img/rctngl_2.png";
-    imgFiles[14] = "img/rctngl_3.png";
-    imgFiles[15] = "img/rctngl_4.png";
-    imgFiles[16] = "img/rctngl_5.png";
-    imgFiles[17] = "img/rctngl_6.png";
 
-    imgFiles[18] = "img/trngl1_1.png";
-    imgFiles[19] = "img/trngl1_2.png";
-    imgFiles[20] = "img/trngl1_3.png";
-    imgFiles[21] = "img/trngl1_4.png";
-    imgFiles[22] = "img/trngl1_5.png";
-    imgFiles[23] = "img/trngl1_6.png";
-
-    imgFiles[24] = "img/trngl2_1.png";
-    imgFiles[25] = "img/trngl2_2.png";
-    imgFiles[26] = "img/trngl2_3.png";
-    imgFiles[27] = "img/trngl2_4.png";
-    imgFiles[28] = "img/trngl2_5.png";
-    imgFiles[29] = "img/trngl2_6.png";
-
-    imgFiles[30] = "img/trngl3_1.png";
-    imgFiles[31] = "img/trngl3_2.png";
-    imgFiles[32] = "img/trngl3_3.png";
-    imgFiles[33] = "img/trngl3_4.png";
-    imgFiles[34] = "img/trngl3_5.png";
-    imgFiles[35] = "img/trngl3_6.png";
-
-    imgFiles[36] = "img/trngl4_1.png";
-    imgFiles[37] = "img/trngl4_2.png";
-    imgFiles[38] = "img/trngl4_3.png";
-    imgFiles[39] = "img/trngl4_4.png";
-    imgFiles[40] = "img/trngl4_5.png";
-    imgFiles[41] = "img/trngl4_6.png";
-}
-
-void TForm1::initImgDigits()
-{
-    imgFiles[0] = "img/d1_1";
-    imgFiles[1] = "img/d1_2";
-    imgFiles[2] = "img/d1_3";
-    imgFiles[3] = "img/d1_4";
-    imgFiles[4] = "img/d1_5";
-    imgFiles[5] = "img/d1_6";
-    imgFiles[6] = "img/d2_1";
-    imgFiles[7] = "img/d2_2";
-    imgFiles[8] = "img/d2_3";
-    imgFiles[9] = "img/d2_4";
-    imgFiles[10] = "img/d2_5";
-    imgFiles[11] = "img/d2_6";
-    imgFiles[12] = "img/d3_1";
-    imgFiles[13] = "img/d3_2";
-    imgFiles[14] = "img/d3_3";
-    imgFiles[15] = "img/d3_4";
-    imgFiles[16] = "img/d3_5";
-    imgFiles[17] = "img/d3_6";
-    imgFiles[18] = "img/d4_1";
-    imgFiles[19] = "img/d4_2";
-    imgFiles[20] = "img/d4_3";
-    imgFiles[21] = "img/d4_4";
-    imgFiles[22] = "img/d4_5";
-    imgFiles[23] = "img/d4_6";
-    imgFiles[24] = "img/d5_1";
-    imgFiles[25] = "img/d5_2";
-    imgFiles[26] = "img/d5_3";
-    imgFiles[27] = "img/d5_4";
-    imgFiles[28] = "img/d5_5";
-    imgFiles[29] = "img/d5_6";
-    imgFiles[30] = "img/d6_1";
-    imgFiles[31] = "img/d6_2";
-    imgFiles[32] = "img/d6_3";
-    imgFiles[33] = "img/d6_4";
-    imgFiles[34] = "img/d6_5";
-    imgFiles[35] = "img/d6_6";
-    imgFiles[36] = "img/d7_1";
-    imgFiles[37] = "img/d7_2";
-    imgFiles[38] = "img/d7_3";
-    imgFiles[39] = "img/d7_4";
-    imgFiles[40] = "img/d7_5";
-    imgFiles[41] = "img/d7_6";
-    imgFiles[42] = "img/d8_1";
-    imgFiles[43] = "img/d8_2";
-    imgFiles[44] = "img/d8_3";
-    imgFiles[45] = "img/d8_4";
-    imgFiles[46] = "img/d8_5";
-    imgFiles[47] = "img/d8_6";
-    imgFiles[48] = "img/d9_1";
-    imgFiles[49] = "img/d9_2";
-    imgFiles[50] = "img/d9_3";
-    imgFiles[51] = "img/d9_4";
-    imgFiles[52] = "img/d9_5";
-    imgFiles[53] = "img/d9_6";
-    imgFiles[54] = "img/d0_1";
-    imgFiles[55] = "img/d0_2";
-    imgFiles[56] = "img/d0_3";
-    imgFiles[57] = "img/d0_4";
-    imgFiles[58] = "img/d0_5";
-    imgFiles[59] = "img/d0_6";
-}
 
 void TForm1::initWeights()
 {
@@ -1064,11 +831,6 @@ void TForm1::loadSmallImgToArray(float *arr)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TForm1::Button10Click(TObject *Sender)
-{
-    loadPattFromFiles();
-}
-//---------------------------------------------------------------------------
 
 void TForm1::scaleArray(float *arr, int len)
 {
@@ -1264,12 +1026,6 @@ void __fastcall TForm1::edScaleImgChange(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TForm1::Button9Click(TObject *Sender)
-{
- showImgFromArray(bigImg, G_tmpImgArr1);
-}
-//---------------------------------------------------------------------------
-
 float __fastcall TForm1::getScale(S_imgPos *pos, float size)
 {
     float scale;
@@ -1293,27 +1049,6 @@ void __fastcall TForm1::trimArray(float **mx1, float **mx2, int w, int h)
     }
 }
 
-void __fastcall TForm1::btSearchCharClick(TObject *Sender)
-{
-	struct S_imgPos pos;
-    float scale;
-    int w,h;
-
-    float tmpArr[IMG_SMALL_H][IMG_SMALL_W];
-
-    M_SET_MATRIX(G_smallTmpImgArr1,-1,IMG_SMALL_W, IMG_SMALL_H)
-	loadImgToBitmap("testImg.png", bigImg, IMG_BIG_H, IMG_BIG_W);
-	loadBitmapToArray(bigImg, G_tmpImgArr1, IMG_BIG_H, IMG_BIG_W);
-	moveImgInArray(G_tmpImgArr1, IMG_BIG_H, IMG_POS_LEFT_TOP, &pos);	
-	scale = getScale(&pos, 24.0);
-	scaleImg(G_tmpImgArr1, 24, scale, pos.width, pos.height);
-     
-    trimArray(G_tmpImgArr1, G_smallTmpImgArr1, 24,24);
-    
-    moveImgInArray(G_smallTmpImgArr1, IMG_SMALL_H, IMG_POS_CENTER, &pos); 
-    showImgFromArray(img1, G_smallTmpImgArr1, IMG_SMALL_W, IMG_SMALL_H);
-}
-//---------------------------------------------------------------------------
 
 void __fastcall TForm1::Button15Click(TObject *Sender)
 {
@@ -1400,21 +1135,11 @@ void __fastcall TForm1::btTestClick(TObject *Sender)
     if (chk3->Checked)
         mf->getSigmoid(nGoal, OUT_N_LEN, G_sigmoidTilt);
 
-    edOut1->Text = FormatFloat("0.00000000", nGoal[0]);
-    edOut2->Text = FormatFloat("0.00000000", nGoal[1]);
-    edOut3->Text = FormatFloat("0.00000000", nGoal[2]);
-    edOut4->Text = FormatFloat("0.00000000", nGoal[3]);
-    edOut5->Text = FormatFloat("0.00000000", nGoal[4]);
-    edOut6->Text = FormatFloat("0.00000000", nGoal[5]);
-    edOut7->Text = FormatFloat("0.00000000", nGoal[6]);
-    edOut8->Text = FormatFloat("0.00000000", -11);
-    edOut9->Text = FormatFloat("0.00000000", -11);
-    edOut10->Text = FormatFloat("0.00000000", -11);
+	showResult(nGoal);
 
 #undef MAX_IMG_SIZE
 }
 //---------------------------------------------------------------------------
-
 
 void __fastcall TForm1::normalizationData(float *dataArr, int len, float minRange, float maxRange)
 {
@@ -1433,4 +1158,84 @@ void __fastcall TForm1::normalizationData(float *dataArr, int len, float minRang
         dataArr[i] = tmpArr[i];
     }
 }
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::btLoadDataSheetClick(TObject *Sender)
+{
+	loadImgToBitmap("dataSheet.png", imgSht, SHEET_H, SHEET_W);
+    loadBitmapToArray(imgSht, G_imgSheetArr, SHEET_H,SHEET_W);
+}
+//---------------------------------------------------------------------------
+
+void TForm1::searchSymbols(float **arr, S_coords *crd)
+{
+    int x1=0,x2=-1,y1=-1,y2=-1;
+    int zeroCnt = 0;
+    int startX=0, startY=0;
+    struct S_coords tmpCrd;
+ 
+	bool stop = false;
+	for(int x=startX; x<SHEET_W; x++){
+		for(int y=startY; y<SHEET_H; y++){
+			if(arr[y][x] > -0.5){
+				getSymbolCoords(x, y, arr, &tmpCrd);
+				stop = true;
+			}
+			if(stop)break;
+		}
+		if(stop)break;
+	}
+}
+
+void TForm1::getSymbolCoords(int y, int x, float **arr, S_coords *crd)
+{
+    const int spaceX=10, spaceY=10;
+    int x1=x,x2=x,y1=y,y2=y;
+	int zeroX=0, zeroY=0;
+	int cntX=0, cntY=0;
+	int tmpX, tmpY;
+	while(zeroY < spaceY){
+		zeroX=0;
+        cntX=0;
+		while (zeroX < spaceX)
+		{
+			tmpX = x - cntX++;
+			tmpY = y + cntY;
+			if(arr[tmpX][tmpY] > -0.5){
+                zeroY=0;
+                zeroX=0;
+            }else zeroX++;
+        }
+        if((x - cntX + spaceX) < x1)x1 = x - cntX + spaceX;
+
+        cntX  = 0;
+        zeroX = 0;
+        while (zeroX < spaceX)
+		{
+			if(arr[x + cntX++][y+cntY] > -0.5){
+				zeroY=0;
+                zeroX=0;
+            }else zeroX++;
+        }
+        if((x + cntX - spaceX) > x2)x2 = x + cntX - spaceX;     
+        zeroY++;
+        cntY++;  
+    }
+    crd->xLeft=x1;
+    crd->xRight=x2;
+	crd->yTop=y;
+	crd->yBottom=cntY-spaceY;
+
+	imgSht->Canvas->Rectangle(crd->xLeft,crd->yTop,crd->xRight,crd->yBottom);
+	Application->ProcessMessages();
+}
+
+
+
+void __fastcall TForm1::Button9Click(TObject *Sender)
+{
+    S_coords crds[100];
+	searchSymbols(G_imgSheetArr, crds);
+}
+//---------------------------------------------------------------------------
 

@@ -69,7 +69,8 @@ float arrDeltaW3[N2_LEN][N_GOAL_LEN];
 #include "patterns/PATT_ABVGD_33.cpp"
 #endif
 
-
+#define SHEET_H 100
+#define SHEET_W 100
  
 
 float P1_patt[PATT_QTY][IN_N_LEN];
@@ -105,7 +106,7 @@ float **G_tmpImgArr2;
 float **G_smallTmpImgArr1;
 float **G_smallTmpImgArr2;
 
-
+float **G_imgSheetArr;
 
 
 AFuncs *mf;
@@ -166,7 +167,10 @@ void TForm1::initArrays()
         G_smallTmpImgArr2[i] = new float[IMG_SMALL_H];
     }
 
-    
+    G_imgSheetArr = new float *[SHEET_W];
+    for (int i = 0; i < SHEET_H; i++){
+        G_imgSheetArr[i] = new float[SHEET_H];
+    }   
 }
 
 
@@ -827,11 +831,6 @@ void TForm1::loadSmallImgToArray(float *arr)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TForm1::Button10Click(TObject *Sender)
-{
-    loadPattFromFiles();
-}
-//---------------------------------------------------------------------------
 
 void TForm1::scaleArray(float *arr, int len)
 {
@@ -1027,12 +1026,6 @@ void __fastcall TForm1::edScaleImgChange(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TForm1::Button9Click(TObject *Sender)
-{
- showImgFromArray(bigImg, G_tmpImgArr1);
-}
-//---------------------------------------------------------------------------
-
 float __fastcall TForm1::getScale(S_imgPos *pos, float size)
 {
     float scale;
@@ -1056,27 +1049,6 @@ void __fastcall TForm1::trimArray(float **mx1, float **mx2, int w, int h)
     }
 }
 
-void __fastcall TForm1::btSearchCharClick(TObject *Sender)
-{
-	struct S_imgPos pos;
-    float scale;
-    int w,h;
-
-    float tmpArr[IMG_SMALL_H][IMG_SMALL_W];
-
-    M_SET_MATRIX(G_smallTmpImgArr1,-1,IMG_SMALL_W, IMG_SMALL_H)
-	loadImgToBitmap("testImg.png", bigImg, IMG_BIG_H, IMG_BIG_W);
-	loadBitmapToArray(bigImg, G_tmpImgArr1, IMG_BIG_H, IMG_BIG_W);
-	moveImgInArray(G_tmpImgArr1, IMG_BIG_H, IMG_POS_LEFT_TOP, &pos);	
-	scale = getScale(&pos, 24.0);
-	scaleImg(G_tmpImgArr1, 24, scale, pos.width, pos.height);
-     
-    trimArray(G_tmpImgArr1, G_smallTmpImgArr1, 24,24);
-    
-    moveImgInArray(G_smallTmpImgArr1, IMG_SMALL_H, IMG_POS_CENTER, &pos); 
-    showImgFromArray(img1, G_smallTmpImgArr1, IMG_SMALL_W, IMG_SMALL_H);
-}
-//---------------------------------------------------------------------------
 
 void __fastcall TForm1::Button15Click(TObject *Sender)
 {
@@ -1169,7 +1141,6 @@ void __fastcall TForm1::btTestClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-
 void __fastcall TForm1::normalizationData(float *dataArr, int len, float minRange, float maxRange)
 {
     float min = 3.4e+38, max = -3.4e+38;
@@ -1187,4 +1158,85 @@ void __fastcall TForm1::normalizationData(float *dataArr, int len, float minRang
         dataArr[i] = tmpArr[i];
     }
 }
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::btLoadDataSheetClick(TObject *Sender)
+{
+	loadImgToBitmap("dataSheet.png", imgSht, SHEET_H, SHEET_W);
+    loadBitmapToArray(imgSht, G_imgSheetArr, SHEET_H,SHEET_W);
+}
+//---------------------------------------------------------------------------
+
+void TForm1::searchSymbols(float **arr, S_coords *crd)
+{
+    int x1=0,x2=-1,y1=-1,y2=-1;
+    int zeroCnt = 0;
+    int startX=0, startY=0;
+    struct S_coords tmpCrd;
+ 
+	bool stop = false;
+	for(int x=startX; x<SHEET_W; x++){
+		for(int y=startY; y<SHEET_H; y++){
+			if(arr[y][x] > -0.5){
+				getSymbolCoords(x, y, arr, &tmpCrd);
+				stop = true;
+			}
+			if(stop)break;
+		}
+		if(stop)break;
+	}
+}
+
+void TForm1::getSymbolCoords(int y, int x, float **arr, S_coords *crd)
+{
+    const int spaceX=20, spaceY=20;
+    int x1=x,x2=x,y1=y,y2=y;
+	int zeroX=0, zeroY=0;
+    int leftX, rightX,topY,bottomY;
+	int cntX=0, cntY=0;
+	int tmpX, tmpY;
+	while(zeroY < spaceY){
+		zeroX=0;
+        cntX=0;
+		while (zeroX < spaceX)
+		{
+			tmpX = x - cntX++;
+			tmpY = y + cntY;
+			if(arr[tmpX][tmpY] > -0.5){
+                zeroY=0;
+                zeroX=0;
+            }else zeroX++;
+        }
+        if((x - cntX + spaceX) < x1)x1 = x - cntX + spaceX;
+
+        cntX  = 0;
+        zeroX = 0;
+        while (zeroX < spaceX)
+		{
+			if(arr[x + cntX++][y+cntY] > -0.5){
+				zeroY=0;
+                zeroX=0;
+            }else zeroX++;
+        }
+        if((x + cntX - spaceX) > x2)x2 = x + cntX - spaceX;     
+        zeroY++;
+        cntY++;  
+    }
+    crd->xLeft=x1;
+    crd->xRight=x2;
+	crd->yTop=y;
+	crd->yBottom=cntY+y-spaceY;
+
+	imgSht->Canvas->Rectangle(crd->xLeft,crd->yTop,crd->xRight,crd->yBottom);
+	Application->ProcessMessages();
+}
+
+
+
+void __fastcall TForm1::Button9Click(TObject *Sender)
+{
+    S_coords crds[100];
+	searchSymbols(G_imgSheetArr, crds);
+}
+//---------------------------------------------------------------------------
 

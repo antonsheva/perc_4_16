@@ -44,7 +44,6 @@ __published:	// IDE-managed Components
 	TButton *Button6;
 	TButton *Button4;
 	TButton *Button8;
-	TButton *Button10;
 	TButton *Button7;
 	TButton *Button11;
 	TButton *Button12;
@@ -56,7 +55,14 @@ __published:	// IDE-managed Components
 	TCheckBox *chk3;
 	TEdit *edScaleImg;
 	TLabel *Label7;
-	TButton *Button9;
+	TButton *btSearchChar;
+	TButton *Button15;
+	TEdit *edPattNum;
+	TButton *Button16;
+	TLabel *Label8;
+	TButton *btTest;
+	TImage *imgSht;
+	TButton *Button17;
 	void __fastcall Button1Click(TObject *Sender);
 	void __fastcall edAlfaChange(TObject *Sender);
 	void __fastcall edSigmodChange(TObject *Sender);
@@ -66,7 +72,6 @@ __published:	// IDE-managed Components
 	void __fastcall Button5Click(TObject *Sender);
 	void __fastcall Button6Click(TObject *Sender);
     void __fastcall Button4Click(TObject *Sender);
-    void __fastcall Button10Click(TObject *Sender);
     
     void __fastcall Button7Click(TObject *Sender);
     void __fastcall Button11Click(TObject *Sender);
@@ -75,8 +80,10 @@ __published:	// IDE-managed Components
 	void __fastcall Button14Click(TObject *Sender);
 	void __fastcall Button8Click(TObject *Sender);
 	void __fastcall edScaleImgChange(TObject *Sender);
-	void __fastcall Button9Click(TObject *Sender);
-    
+	void __fastcall Button15Click(TObject *Sender);
+	void __fastcall Button16Click(TObject *Sender);
+	void __fastcall btTestClick(TObject *Sender);
+
 
 private:    // User declarations
 public:		// User declarations
@@ -93,12 +100,15 @@ public:		// User declarations
 	};
 	
 
+    void __fastcall normalizationData(float *dataArr, int len, float minRange = -1, float maxRange = 1);
+    void __fastcall trimArray(float **mx1, float **mx2, int w, int h);
+    float __fastcall getScale(S_imgPos *pos, float size);
 
     void TForm1::scaleArray(float *arr, int len);
 	void initArrays();
     void testFunc(String flName);
-    void TForm1::initImgNameArray();
-    void initImgDigits();
+    void initNnParameters();
+	void showResult(float *nGoal);
     void showImgFromArray(TImage *img, float **arr, int w=140, int h=140);
     void TForm1::loadPattFromFiles();
     void TForm1::getValFromFile(BYTE *val, int *meta, int pos = -1);
@@ -109,8 +119,8 @@ public:		// User declarations
     void loadBitmapToArray(TImage *bitmap, float **arr, int h, int w);
     void srchSnglImgPos(float **G_tmpImgArr1, S_imgPos *pos, int h, int w);
     void loadSmallImgToArray(float *arr);
-	void scaleImg(float **imgArr, float scale, int w, int h);
-	void moveImgInArray(float **imgArr, int position, S_imgPos *imgParam);
+	void scaleImg(float **imgArr, int maxSize, float scale, int w, int h);
+	void moveImgInArray(float **imgArr, int maxSize, int position, S_imgPos *imgParam);
 
 };
 //---------------------------------------------------------------------------

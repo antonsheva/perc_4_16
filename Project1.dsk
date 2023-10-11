@@ -11,20 +11,26 @@ File_8=TSourceModule,'C:\RStudioPrj\NS\Unit1.dfm',0,1,1,1,1,0,0,,
 
 [Modules]
 Module0=C:\RStudioPrj\perc_4_16\Unit1.cpp
-Module1=C:\RStudioPrj\perc_4_16\patterns\PATT_DIGITS_10.cpp
-Module2=C:\RStudioPrj\perc_4_16\patterns\PATT_FIGURES_7.cpp
-Module3=C:\RStudioPrj\perc_4_16\GlobalVar.h
-Module4=c:\program files (x86)\embarcadero\rad studio\7.0\include\vcl\sysmac.h
-Module5=C:\RStudioPrj\perc_4_16\afuncs.h
-Module6=C:\RStudioPrj\perc_4_16\Unit2.cpp
-Module7=default.htm
-Count=8
+Module1=C:\RStudioPrj\perc_4_16\Unit3.cpp
+Module2=C:\RStudioPrj\perc_4_16\patterns\PATT_DIGITS_10.cpp
+Module3=C:\RStudioPrj\perc_4_16\patterns\PATT_FIGURES_7.cpp
+Module4=C:\RStudioPrj\perc_4_16\GlobalVar.h
+Module5=c:\program files (x86)\embarcadero\rad studio\7.0\include\vcl\sysmac.h
+Module6=C:\RStudioPrj\perc_4_16\afuncs.h
+Module7=C:\RStudioPrj\perc_4_16\Unit2.cpp
+Module8=default.htm
+Count=9
 EditWindowCount=1
 
 [C:\RStudioPrj\perc_4_16\Unit1.cpp]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
+
+[C:\RStudioPrj\perc_4_16\Unit3.cpp]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=1
 
 [C:\RStudioPrj\perc_4_16\patterns\PATT_DIGITS_10.cpp]
 ModuleType=TSourceModule
@@ -60,7 +66,7 @@ FormOnTop=0
 ModuleType=TURLModule
 
 [EditWindow0]
-ViewCount=8
+ViewCount=9
 CurrentEditView=C:\RStudioPrj\perc_4_16\Unit1.cpp
 View0=0
 View1=1
@@ -70,6 +76,7 @@ View4=4
 View5=5
 View6=6
 View7=7
+View8=8
 PercentageSizes=1
 Create=1
 Visible=1
@@ -77,21 +84,21 @@ Docked=1
 State=0
 Left=0
 Top=0
-Width=10000
-Height=8868
+Width=4188
+Height=2941
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=10000
-ClientHeight=8868
+ClientWidth=4188
+ClientHeight=2941
 DockedToMainForm=1
 BorlandEditorCodeExplorer=BorlandEditorCodeExplorer@EditWindow0
 TopPanelSize=0
 LeftPanelSize=1891
 LeftPanelClients=PropertyInspector,DockSite3
-LeftPanelData=0000080001010000000067120000000000000163070000000000000100000000610E000009000000446F636B53697465330100000000B72000001100000050726F7065727479496E73706563746F72FFFFFFFF
+LeftPanelData=000008000101000000001A060000000000000163070000000000000100000000610E000009000000446F636B53697465330100000000DA0A00001100000050726F7065727479496E73706563746F72FFFFFFFF
 RightPanelSize=2000
 RightPanelClients=DockSite2,DockSite4
-RightPanelData=00000800010100000000671200000000000001D00700000000000001000000004912000009000000446F636B53697465320100000000B720000009000000446F636B5369746534FFFFFFFF
+RightPanelData=000008000101000000001A0600000000000001D00700000000000001000000004912000009000000446F636B53697465320100000000DA0A000009000000446F636B5369746534FFFFFFFF
 BottomPanelSize=0
 BottomPanelClients=DockSite1,MessageView
 BottomPanelData=0000080001020200000009000000446F636B53697465310F0000004D65737361676556696577466F726D1534000000000000022106000000000000FFFFFFFF
@@ -106,15 +113,26 @@ WelcomePageURL=bds:/default.htm
 [View1]
 CustomEditViewType=TEditView
 Module=C:\RStudioPrj\perc_4_16\Unit1.cpp
-CursorX=39
-CursorY=1168
-TopLine=1149
+CursorX=68
+CursorY=1220
+TopLine=1212
 LeftCol=1
 Elisions=
 Bookmarks=
 EditViewName=C:\RStudioPrj\perc_4_16\Unit1.cpp
 
 [View2]
+CustomEditViewType=TEditView
+Module=C:\RStudioPrj\perc_4_16\Unit3.cpp
+CursorX=1
+CursorY=1
+TopLine=1
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=Borland.FormDesignerView
+
+[View3]
 CustomEditViewType=TEditView
 Module=C:\RStudioPrj\perc_4_16\patterns\PATT_DIGITS_10.cpp
 CursorX=50
@@ -125,7 +143,7 @@ Elisions=
 Bookmarks=
 EditViewName=C:\RStudioPrj\perc_4_16\patterns\PATT_DIGITS_10.cpp
 
-[View3]
+[View4]
 CustomEditViewType=TEditView
 Module=C:\RStudioPrj\perc_4_16\patterns\PATT_FIGURES_7.cpp
 CursorX=13
@@ -136,7 +154,7 @@ Elisions=
 Bookmarks=
 EditViewName=C:\RStudioPrj\perc_4_16\patterns\PATT_FIGURES_7.cpp
 
-[View4]
+[View5]
 CustomEditViewType=TEditView
 Module=c:\program files (x86)\embarcadero\rad studio\7.0\include\vcl\sysmac.h
 CursorX=1
@@ -147,7 +165,7 @@ Elisions=
 Bookmarks=
 EditViewName=c:\program files (x86)\embarcadero\rad studio\7.0\include\vcl\sysmac.h
 
-[View5]
+[View6]
 CustomEditViewType=TEditView
 Module=C:\RStudioPrj\perc_4_16\GlobalVar.h
 CursorX=9
@@ -158,7 +176,7 @@ Elisions=
 Bookmarks=
 EditViewName=C:\RStudioPrj\perc_4_16\GlobalVar.h
 
-[View6]
+[View7]
 CustomEditViewType=TEditView
 Module=C:\RStudioPrj\perc_4_16\Unit2.cpp
 CursorX=33
@@ -169,7 +187,7 @@ Elisions=
 Bookmarks=
 EditViewName=C:\RStudioPrj\perc_4_16\Unit2.h
 
-[View7]
+[View8]
 CustomEditViewType=TEditView
 Module=C:\RStudioPrj\perc_4_16\afuncs.h
 CursorX=23
@@ -181,12 +199,20 @@ Bookmarks=
 EditViewName=C:\RStudioPrj\perc_4_16\afuncs.h
 
 [Watches]
-Count=2
-Watch0='P1_mN1',256,0,18,1,0,'Watches',1
-Watch1='tmp1',256,0,18,1,0,'Watches',1
+Count=10
+Watch0='x',256,0,18,1,0,'Watches',1
+Watch1='y',256,0,18,1,0,'Watches',1
+Watch2='crd',256,0,18,1,0,'Watches',1
+Watch3='cntX',256,0,18,1,0,'Watches',1
+Watch4='arr[tmpX][tmpY]',256,0,18,1,0,'Watches',1
+Watch5='zeroX',256,0,18,1,0,'Watches',1
+Watch6='zeroY',256,0,18,1,0,'Watches',1
+Watch7='x1',256,0,18,1,0,'Watches',1
+Watch8='cntY',256,0,18,1,0,'Watches',1
+Watch9='x2',256,0,18,1,0,'Watches',1
 
 [WatchWindow]
-WatchColumnWidth=120
+WatchColumnWidth=212
 WatchShowColumnHeaders=1
 PercentageSizes=1
 Create=1
@@ -217,18 +243,16 @@ PercentageSizes=1
 Create=1
 Visible=1
 Docked=0
-State=2
-Left=148
-Top=279
-Width=7445
-Height=7103
+State=1
+Left=297
+Top=618
+Width=4312
+Height=4309
 MaxLeft=-8
 MaxTop=-15
-MaxWidth=10125
-MaxHeight=10235
-ClientWidth=10000
-ClientHeight=9662
-BottomPanelSize=8375
+ClientWidth=4188
+ClientHeight=3735
+BottomPanelSize=2778
 BottomPanelClients=EditWindow0
 BottomPanelData=0000080000000000000000000000000000000000000000000000000100000000000000000C0000004564697457696E646F775F30FFFFFFFF
 
@@ -279,11 +303,11 @@ State=0
 Left=0
 Top=0
 Width=2000
-Height=3574
+Height=0
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=2000
-ClientHeight=3574
+ClientHeight=0
 TBDockHeight=7147
 LRDockWidth=2000
 Dockable=1
@@ -503,16 +527,21 @@ State=0
 Left=0
 Top=288
 Width=1891
-Height=4632
+Height=0
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1891
-ClientHeight=4632
+ClientHeight=0
 TBDockHeight=9132
 LRDockWidth=1891
 Dockable=1
 StayOnTop=0
 SplitPos=111
+
+[PropInspDesignerSelection]
+ArrangeBy=Name
+SelectedItem=CustomHint,
+ExpandedItems=Anchors=0,BorderIcons=0,Constraints=0,Font=0,GlassFrame=0,HorzScrollBar=0,Margins=0,Padding=0,Touch=0,VertScrollBar=0,ImageMargins=0
 
 [ModelViewTool]
 PercentageSizes=1
@@ -726,11 +755,11 @@ State=0
 Left=0
 Top=360
 Width=2000
-Height=3574
+Height=0
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=2000
-ClientHeight=3574
+ClientHeight=0
 TBDockHeight=7235
 LRDockWidth=2000
 Dockable=1
