@@ -121,6 +121,8 @@ __fastcall TForm1::TForm1(TComponent *Owner)
     G_sigmoidTilt = 5;
 	G_stop = false;
 	G_scaleImg = 1;
+	G_spaceBtwnSymX = 3;
+    G_spaceBtwnSymY = 3;
 
     initNnParameters();
 
@@ -172,10 +174,6 @@ void TForm1::initArrays()
         G_imgSheetArr[i] = new float[SHEET_H];
     }   
 }
-
-
-
-
 
 void TForm1::initWeights()
 {
@@ -1167,67 +1165,98 @@ void __fastcall TForm1::btLoadDataSheetClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+int TForm1::checkNewSymbol(int x, int y, S_coords *crd, int len)
+{
+    for(int i=0; i<len; i++){
+		if((crd[i].xLeft < x)&&(crd[i].xRight > x)&&(crd[i].yTop < y)&&(crd[i].yBottom > y)){
+			return crd[i].xRight;
+		}
+    }
+    return -1; 
+}
+//---------------------------------------------------------------------------
+
 void TForm1::searchSymbols(float **arr, S_coords *crd)
 {
     int x1=0,x2=-1,y1=-1,y2=-1;
     int zeroCnt = 0;
-    int startX=0, startY=0;
+
+    int tmp;
+    int len=0;
     struct S_coords tmpCrd;
  
 	bool stop = false;
-	for(int x=startX; x<SHEET_W; x++){
-		for(int y=startY; y<SHEET_H; y++){
-			if(arr[y][x] > -0.5){
-				getSymbolCoords(x, y, arr, &tmpCrd);
-				stop = true;
+	for(int y=0; y<SHEET_W; y++){
+		for(int x=0; x<SHEET_H; x++){
+			if(arr[x][y] > -0.5){
+                tmp = checkNewSymbol(x,y, crd, len);
+                if(tmp != -1){
+					x = tmp;
+                }else{
+				    getSymbolCoords(x, y, arr, &tmpCrd);
+                    crd[len] = tmpCrd;
+                    len++;
+
+                    imgSht->Canvas->MoveTo(tmpCrd.xLeft,tmpCrd.yTop);
+                    imgSht->Canvas->LineTo(tmpCrd.xRight,tmpCrd.yTop);
+                    imgSht->Canvas->LineTo(tmpCrd.xRight,tmpCrd.yBottom);
+                    imgSht->Canvas->LineTo(tmpCrd.xLeft,tmpCrd.yBottom);
+                    imgSht->Canvas->LineTo(tmpCrd.xLeft,tmpCrd.yTop);
+                    Application->ProcessMessages();                   
+                }
 			}
 			if(stop)break;
 		}
 		if(stop)break;
 	}
+
+
 }
 
-void TForm1::getSymbolCoords(int y, int x, float **arr, S_coords *crd)
+void TForm1::getSymbolCoords(int x, int y, float **arr, S_coords *crd)
 {
-    const int spaceX=30, spaceY=30;
     int x1=x,x2=x,y1=y,y2=y;
 	int zeroX=0, zeroY=0;
 	int cntX=0, cntY=0;
 	int tmpX, tmpY;
-	while(zeroY < spaceY){
+	while(zeroY < G_spaceBtwnSymY){
 		zeroX=0;
         cntX=0;
-		while (zeroX < spaceX)
+		while (zeroX < G_spaceBtwnSymX)
 		{
-			tmpX = x - cntX++;
-			tmpY = y + cntY;
-			if(arr[tmpX][tmpY] > -0.5){
+			if(arr[x1 - cntX++][y + cntY] > -0.5){
                 zeroY=0;
                 zeroX=0;
             }else zeroX++;
         }
-        if((x - cntX + spaceX) < x1)x1 = x - cntX + spaceX;
+        x1 = x1 - cntX + G_spaceBtwnSymX;
 
         cntX  = 0;
         zeroX = 0;
-        while (zeroX < spaceX)
+        while (zeroX < G_spaceBtwnSymX)
 		{
-			if(arr[x + cntX++][y+cntY] > -0.5){
+			if(arr[x2 + cntX++][y+cntY] > -0.5){
 				zeroY=0;
                 zeroX=0;
             }else zeroX++;
         }
-        if((x + cntX - spaceX) > x2)x2 = x + cntX - spaceX;     
+        x2 = x2 + cntX - G_spaceBtwnSymX;     
+        for(int i = x1; i <= x2; i++)if(arr[i][y+cntY] > -0.5)zeroY=0;
         zeroY++;
-        cntY++;  
-    }
-    crd->xLeft=x1;
-    crd->xRight=x2;
-	crd->yTop=y;
-	crd->yBottom=cntY-spaceY;
+		cntY++;
+	}
+	 
+	x1 -= 2;
+	x2 += 2;
+	y1 -= 3;
+	y2 =  cntY+y-G_spaceBtwnSymY+3;
 
-	imgSht->Canvas->Rectangle(crd->xLeft,crd->yTop,crd->xRight,crd->yBottom);
-	Application->ProcessMessages();
+	crd->xLeft=x1;
+	crd->xRight=x2;
+	crd->yTop=y1;
+	crd->yBottom=y2;
+
+
 }
 
 
@@ -1236,6 +1265,18 @@ void __fastcall TForm1::Button9Click(TObject *Sender)
 {
     S_coords crds[100];
 	searchSymbols(G_imgSheetArr, crds);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::edSpaceXChange(TObject *Sender)
+{
+	G_spaceBtwnSymX = StrToInt(edSpaceX->Text);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::edSpaceYChange(TObject *Sender)
+{
+	G_spaceBtwnSymY = StrToInt(edSpaceY->Text);
 }
 //---------------------------------------------------------------------------
 

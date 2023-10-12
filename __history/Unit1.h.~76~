@@ -62,6 +62,11 @@ __published:	// IDE-managed Components
 	TButton *btTest;
 	TImage *imgSht;
 	TButton *btLoadDataSheet;
+	TButton *Button9;
+	TEdit *edSpaceX;
+	TLabel *Label9;
+	TLabel *Label10;
+	TEdit *edSpaceY;
 	void __fastcall Button1Click(TObject *Sender);
 	void __fastcall edAlfaChange(TObject *Sender);
 	void __fastcall edSigmodChange(TObject *Sender);
@@ -83,7 +88,9 @@ __published:	// IDE-managed Components
 	void __fastcall Button16Click(TObject *Sender);
 	void __fastcall btTestClick(TObject *Sender);
 	void __fastcall btLoadDataSheetClick(TObject *Sender);
-
+    void __fastcall Button9Click(TObject *Sender);
+	void __fastcall edSpaceXChange(TObject *Sender);
+	void __fastcall edSpaceYChange(TObject *Sender);
 
 private:    // User declarations
 public:		// User declarations
@@ -107,6 +114,8 @@ public:		// User declarations
        int yBottom; 
     };
 
+    
+	int checkNewSymbol(int x, int y, S_coords *crd, int len);
     void searchSymbols(float **arr, S_coords *crd);
     void getSymbolCoords(int x, int y, float **arr, S_coords *crd);
     void __fastcall normalizationData(float *dataArr, int len, float minRange = -1, float maxRange = 1);

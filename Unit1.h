@@ -63,6 +63,22 @@ __published:	// IDE-managed Components
 	TImage *imgSht;
 	TButton *btLoadDataSheet;
 	TButton *Button9;
+	TEdit *edSpaceX;
+	TLabel *Label9;
+	TLabel *Label10;
+	TEdit *edSpaceY;
+	TLabel *Label11;
+	TLabel *Label12;
+	TEdit *edExtLeft;
+	TEdit *edExtRight;
+	TLabel *Label13;
+	TLabel *Label14;
+	TEdit *edExtTop;
+	TEdit *edExtBottom;
+	TLabel *Label15;
+	TButton *Button10;
+	TEdit *edSymNum;
+	TListBox *lb2;
 	void __fastcall Button1Click(TObject *Sender);
 	void __fastcall edAlfaChange(TObject *Sender);
 	void __fastcall edSigmodChange(TObject *Sender);
@@ -84,8 +100,14 @@ __published:	// IDE-managed Components
 	void __fastcall Button16Click(TObject *Sender);
 	void __fastcall btTestClick(TObject *Sender);
 	void __fastcall btLoadDataSheetClick(TObject *Sender);
-	void __fastcall Button9Click(TObject *Sender);
-
+    void __fastcall Button9Click(TObject *Sender);
+	void __fastcall edSpaceXChange(TObject *Sender);
+	void __fastcall edSpaceYChange(TObject *Sender);
+	void __fastcall edExtLeftChange(TObject *Sender);
+	void __fastcall edExtRightChange(TObject *Sender);
+	void __fastcall edExtTopChange(TObject *Sender);
+	void __fastcall edExtBottomChange(TObject *Sender);
+	void __fastcall Button10Click(TObject *Sender);
 
 private:    // User declarations
 public:		// User declarations
@@ -108,11 +130,15 @@ public:		// User declarations
        int yTop;
        int yBottom; 
     };
+    S_coords G_crds[100];
 
-    void searchSymbols(float **arr, S_coords *crd);
+    void TForm1::initGoalArray();
+
+	int checkNewSymbol(int x, int y, S_coords *crd, int len);
+    int searchSymbols(float **arr, S_coords *crd);
     void getSymbolCoords(int x, int y, float **arr, S_coords *crd);
     void __fastcall normalizationData(float *dataArr, int len, float minRange = -1, float maxRange = 1);
-    void __fastcall trimArray(float **mx1, float **mx2, int w, int h);
+    void __fastcall trimArray(float **mx1, float **mx2, int w, int h, int startX=0, int startY=0);
     float __fastcall getScale(S_imgPos *pos, float size);
 
     void TForm1::scaleArray(float *arr, int len);
@@ -131,7 +157,7 @@ public:		// User declarations
     void srchSnglImgPos(float **G_tmpImgArr1, S_imgPos *pos, int h, int w);
     void loadSmallImgToArray(float *arr);
 	void scaleImg(float **imgArr, int maxSize, float scale, int w, int h);
-	void moveImgInArray(float **imgArr, int maxSize, int position, S_imgPos *imgParam);
+	void moveImgInArray(float **mxImg, int mxSide, int position, S_imgPos *imgParam);
  
 };
 //---------------------------------------------------------------------------

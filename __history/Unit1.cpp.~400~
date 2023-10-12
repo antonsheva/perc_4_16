@@ -22,12 +22,13 @@ TForm1 *Form1;
 #define N2_LEN 10
 #define N_GOAL_LEN 10
 
-#define IMG_BIG_H 140
-#define IMG_BIG_W 140
+#define IMG_BIG_H   140
+#define IMG_BIG_W   140
 #define IMG_SMALL_H 28
 #define IMG_SMALL_W 28
+#define SYM_SIZE    50
 
-#define LAYER_QTY 4
+#define LAYER_QTY   4
 
 #define IMG_POS_LEFT_TOP 1
 #define IMG_POS_CENTER   2
@@ -58,8 +59,8 @@ float arrDeltaW3[N2_LEN][N_GOAL_LEN];
 
 
 #define PATT_FIGURES_7 0
-#define PATT_DIGITS_10 1
-
+#define PATT_DIGITS_10 0
+#define PATT_ABVGD_33  1
 
 #if     PATT_DIGITS_10
 #include "patterns/PATT_DIGITS_10.cpp"
@@ -107,7 +108,7 @@ float **G_smallTmpImgArr1;
 float **G_smallTmpImgArr2;
 
 float **G_imgSheetArr;
-
+float **G_symbolMx;
 
 AFuncs *mf;
 FILE *fl;
@@ -121,6 +122,13 @@ __fastcall TForm1::TForm1(TComponent *Owner)
     G_sigmoidTilt = 5;
 	G_stop = false;
 	G_scaleImg = 1;
+	G_spaceBtwnSymX = 3;
+    G_spaceBtwnSymY = 3;
+
+    G_extBoardLeft = 2;
+    G_extBoardRight = 2;
+    G_extBoardTop = 2;
+    G_extBoardBottom = 2;
 
     initNnParameters();
 
@@ -170,12 +178,14 @@ void TForm1::initArrays()
     G_imgSheetArr = new float *[SHEET_W];
     for (int i = 0; i < SHEET_H; i++){
         G_imgSheetArr[i] = new float[SHEET_H];
-    }   
+    } 
+
+    G_symbolMx = new float *[SYM_SIZE];
+    for(int i = 0; i < SYM_SIZE; i++){
+        G_symbolMx[i] = new float[SYM_SIZE];
+    }
+
 }
-
-
-
-
 
 void TForm1::initWeights()
 {
@@ -622,22 +632,22 @@ void TForm1::showImgFromArray(TImage *img, float **arr, int w, int h)
 	}
 }
 
-void TForm1::moveImgInArray(float **imgArr, int maxSize, int position, S_imgPos *imgParam)
+void TForm1::moveImgInArray(float **mxImg, int mxSide, int position, S_imgPos *imgParam)
 {
     struct S_imgPos pos;
     int startX, startY;
-    float **tmpArr = new float *[maxSize];
-    for(int i = 0; i < maxSize; i++){
-        tmpArr[i] = new float[maxSize];
+    float **tmpArr = new float *[mxSide];
+    for(int i = 0; i < mxSide; i++){
+        tmpArr[i] = new float[mxSide];
     }
 
-    M_SET_MATRIX(tmpArr,-1,maxSize,maxSize)
-    srchSnglImgPos(imgArr, &pos, maxSize, maxSize);
+    M_SET_MATRIX(tmpArr,-1,mxSide,mxSide)
+    srchSnglImgPos(mxImg, &pos, mxSide, mxSide);
 
 	// img set to center
     if(position == IMG_POS_CENTER){
-        startX = (maxSize-pos.width)/2;
-        startY = (maxSize-pos.height)/2;
+        startX = (mxSide-pos.width)/2;
+        startY = (mxSide-pos.height)/2;
     }
     // img set to left-top position
     if(position == IMG_POS_LEFT_TOP){
@@ -647,16 +657,18 @@ void TForm1::moveImgInArray(float **imgArr, int maxSize, int position, S_imgPos 
 
 	for (int x = 0; x < pos.width; x++){
 		for (int y = 0; y < pos.height; y++){
-			tmpArr[x+startX][y+startY] = imgArr[x+pos.xLetf][y+pos.yTop];
+			tmpArr[x+startX][y+startY] = mxImg[x+pos.xLetf][y+pos.yTop];
 		}
 	}
     *imgParam = pos;
  
-	for (int x = 0; x < maxSize; x++){
-		for (int y = 0; y < maxSize; y++){
-			imgArr[x][y] = tmpArr[x][y];
+	for (int x = 0; x < mxSide; x++){
+		for (int y = 0; y < mxSide; y++){
+			mxImg[x][y] = tmpArr[x][y];
 		}
-	}    
+	}   
+
+    delete tmpArr; 
 }
 
 
@@ -1040,11 +1052,11 @@ float __fastcall TForm1::getScale(S_imgPos *pos, float size)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TForm1::trimArray(float **mx1, float **mx2, int w, int h)
+void __fastcall TForm1::trimArray(float **mx1, float **mx2, int w, int h, int startX, int startY)
 {
     for(int y=0; y < h; y++){
         for(int x = 0; x < w; x++){
-            mx2[y][x] = mx1[y][x];
+            mx2[y][x] = mx1[y+startY][x+startX];
         }
     }
 }
@@ -1052,7 +1064,7 @@ void __fastcall TForm1::trimArray(float **mx1, float **mx2, int w, int h)
 
 void __fastcall TForm1::Button15Click(TObject *Sender)
 {
-    #define MAX_IMG_SIZE 24
+    #define PATT_SIZE 24
     bool err = false;
 	struct S_imgPos pos;
     float scale;
@@ -1066,10 +1078,10 @@ void __fastcall TForm1::Button15Click(TObject *Sender)
         loadImgToBitmap(imgFiles[i], bigImg, IMG_BIG_H, IMG_BIG_W);
         loadBitmapToArray(bigImg, G_tmpImgArr1, IMG_BIG_H, IMG_BIG_W); 
         moveImgInArray(G_tmpImgArr1, IMG_BIG_H, IMG_POS_LEFT_TOP, &pos);	
-        scale = getScale(&pos, MAX_IMG_SIZE);
-        scaleImg(G_tmpImgArr1, MAX_IMG_SIZE, scale, pos.width, pos.height);
+        scale = getScale(&pos, PATT_SIZE);
+        scaleImg(G_tmpImgArr1, PATT_SIZE, scale, pos.width, pos.height);
         
-        trimArray(G_tmpImgArr1, G_smallTmpImgArr1, MAX_IMG_SIZE,MAX_IMG_SIZE);
+        trimArray(G_tmpImgArr1, G_smallTmpImgArr1, PATT_SIZE,PATT_SIZE);
         moveImgInArray(G_smallTmpImgArr1, IMG_SMALL_H, IMG_POS_CENTER, &pos); 
          
 		M_COPY_MX_TO_ARR(G_smallTmpImgArr1,IMG_SMALL_H,IMG_SMALL_W,P1_patt[i])
@@ -1079,7 +1091,7 @@ void __fastcall TForm1::Button15Click(TObject *Sender)
     if (!err)
         edInfo->Text = "images was loaded to patterns";
     return;
-    #undef MAX_IMG_SIZE
+    #undef PATT_SIZE
 }
 //---------------------------------------------------------------------------
 
@@ -1094,7 +1106,7 @@ void __fastcall TForm1::Button16Click(TObject *Sender)
 
 void __fastcall TForm1::btTestClick(TObject *Sender)
 {
-#define MAX_IMG_SIZE 24
+#define PATT_SIZE 24
     
     struct S_imgPos pos;
     float scale;
@@ -1113,10 +1125,10 @@ void __fastcall TForm1::btTestClick(TObject *Sender)
     loadImgToBitmap("testImg1.png", bigImg, IMG_BIG_H, IMG_BIG_W);
     loadBitmapToArray(bigImg, G_tmpImgArr1, IMG_BIG_H, IMG_BIG_W); 
     moveImgInArray(G_tmpImgArr1, IMG_BIG_H, IMG_POS_LEFT_TOP, &pos);	
-    scale = getScale(&pos, MAX_IMG_SIZE);
-    scaleImg(G_tmpImgArr1, MAX_IMG_SIZE, scale, pos.width, pos.height);
+    scale = getScale(&pos, PATT_SIZE);
+    scaleImg(G_tmpImgArr1, PATT_SIZE, scale, pos.width, pos.height);
     
-    trimArray(G_tmpImgArr1, G_smallTmpImgArr1, MAX_IMG_SIZE,MAX_IMG_SIZE);
+    trimArray(G_tmpImgArr1, G_smallTmpImgArr1, PATT_SIZE,PATT_SIZE);
     moveImgInArray(G_smallTmpImgArr1, IMG_SMALL_H, IMG_POS_CENTER, &pos); 
     showImgFromArray(img1,G_smallTmpImgArr1, IMG_SMALL_H, IMG_SMALL_W);
     
@@ -1137,7 +1149,7 @@ void __fastcall TForm1::btTestClick(TObject *Sender)
 
 	showResult(nGoal);
 
-#undef MAX_IMG_SIZE
+#undef PATT_SIZE
 }
 //---------------------------------------------------------------------------
 
@@ -1167,75 +1179,200 @@ void __fastcall TForm1::btLoadDataSheetClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void TForm1::searchSymbols(float **arr, S_coords *crd)
+int TForm1::checkNewSymbol(int x, int y, S_coords *crd, int len)
+{
+    for(int i=0; i<len; i++){
+		if((crd[i].xLeft < x)&&(crd[i].xRight > x)&&(crd[i].yTop < y)&&(crd[i].yBottom > y)){
+			return crd[i].xRight;
+		}
+    }
+    return -1; 
+}
+//---------------------------------------------------------------------------
+
+int TForm1::searchSymbols(float **arr, S_coords *crd)
 {
     int x1=0,x2=-1,y1=-1,y2=-1;
     int zeroCnt = 0;
-    int startX=0, startY=0;
+
+    int tmp;
+    int symQty=0;
     struct S_coords tmpCrd;
  
 	bool stop = false;
-	for(int x=startX; x<SHEET_W; x++){
-		for(int y=startY; y<SHEET_H; y++){
-			if(arr[y][x] > -0.5){
-				getSymbolCoords(x, y, arr, &tmpCrd);
-				stop = true;
+	for(int y=0; y<SHEET_W; y++){
+		for(int x=0; x<SHEET_H; x++){
+			if(arr[x][y] > -0.5){
+                tmp = checkNewSymbol(x,y, crd, symQty);
+                if(tmp != -1){
+					x = tmp;
+                }else{
+				    getSymbolCoords(x, y, arr, &tmpCrd);
+                    crd[symQty] = tmpCrd;
+                    symQty++;
+
+                    imgSht->Canvas->MoveTo(tmpCrd.xLeft,tmpCrd.yTop);
+                    imgSht->Canvas->LineTo(tmpCrd.xRight,tmpCrd.yTop);
+                    imgSht->Canvas->LineTo(tmpCrd.xRight,tmpCrd.yBottom);
+                    imgSht->Canvas->LineTo(tmpCrd.xLeft,tmpCrd.yBottom);
+                    imgSht->Canvas->LineTo(tmpCrd.xLeft,tmpCrd.yTop);
+                    Application->ProcessMessages();                   
+                }
 			}
 			if(stop)break;
 		}
 		if(stop)break;
 	}
+    return symQty;
 }
 
-void TForm1::getSymbolCoords(int y, int x, float **arr, S_coords *crd)
+void TForm1::getSymbolCoords(int x, int y, float **arr, S_coords *crd)
 {
-    const int spaceX=10, spaceY=10;
     int x1=x,x2=x,y1=y,y2=y;
 	int zeroX=0, zeroY=0;
 	int cntX=0, cntY=0;
 	int tmpX, tmpY;
-	while(zeroY < spaceY){
+	while(zeroY < G_spaceBtwnSymY){
 		zeroX=0;
         cntX=0;
-		while (zeroX < spaceX)
+		while (zeroX < G_spaceBtwnSymX)
 		{
-			tmpX = x - cntX++;
-			tmpY = y + cntY;
-			if(arr[tmpY][tmpX] > -0.5){
+			if(arr[x1 - cntX++][y + cntY] > -0.5){
                 zeroY=0;
                 zeroX=0;
             }else zeroX++;
         }
-        if((x - cntX + spaceX) < x1)x1 = x - cntX + spaceX;
+        x1 = x1 - cntX + G_spaceBtwnSymX;
 
         cntX  = 0;
         zeroX = 0;
-        while (zeroX < spaceX)
-        {
-			if(arr[y+cntY][x + cntX++] > -0.5){
+        while (zeroX < G_spaceBtwnSymX)
+		{
+			if(arr[x2 + cntX++][y+cntY] > -0.5){
 				zeroY=0;
                 zeroX=0;
             }else zeroX++;
         }
-        if((x + cntX - spaceX) > x2)x2 = x + cntX - spaceX;     
+        x2 = x2 + cntX - G_spaceBtwnSymX;     
+        for(int i = x1; i <= x2; i++)if(arr[i][y+cntY] > -0.5)zeroY=0;
         zeroY++;
-        cntY++;  
-    }
-    crd->xLeft=x1;
-    crd->xRight=x2;
+		cntY++;
+	}
+	 
+	x1 -= G_extBoardLeft;
+	x2 += G_extBoardRight;
+	y1 -= G_extBoardTop;
+	y2 =  cntY+y-G_spaceBtwnSymY+G_extBoardBottom;
+
+	crd->xLeft=x1;
+	crd->xRight=x2;
 	crd->yTop=y1;
-	crd->yBottom=cntY-spaceY;
+	crd->yBottom=y2;
 
-	imgSht->Canvas->Rectangle(crd->xLeft,crd->yTop,crd->xRight,crd->yBottom);
-	Application->ProcessMessages();
+
 }
-
-
+//---------------------------------------------------------------------------
 
 void __fastcall TForm1::Button9Click(TObject *Sender)
 {
-    S_coords crds[100];
-	searchSymbols(G_imgSheetArr, crds);
+    #define PATT_SIZE 24
+    float scale;
+    int x;
+    int y;
+    int xSize;
+    int ySize;
+	int symQty = searchSymbols(G_imgSheetArr, G_crds);
+    S_imgPos pos;
+
+    for(int i=0; i< symQty; i++){
+        M_SET_MATRIX(G_symbolMx,-1,SYM_SIZE,SYM_SIZE)
+		y = G_crds[i].xLeft;
+        x = G_crds[i].yTop;
+        ySize = G_crds[symNumber].xRight - G_crds[symNumber].xLeft;
+        xSize = G_crds[symNumber].yBottom - G_crds[symNumber].yTop;
+        trimArray(G_imgSheetArr,G_symbolMx, xSize,ySize, x,y);
+        moveImgInArray(G_symbolMx,SYM_SIZE,IMG_POS_LEFT_TOP,&pos);
+        scale = getScale(&pos, PATT_SIZE);
+        scaleImg(G_symbolMx, PATT_SIZE, scale, pos.width, pos.height);
+
+        trimArray(G_symbolMx, G_smallTmpImgArr1, PATT_SIZE,PATT_SIZE);
+        moveImgInArray(G_smallTmpImgArr1, IMG_SMALL_H, IMG_POS_CENTER, &pos); 
+
+        M_COPY_MX_TO_ARR(G_smallTmpImgArr1,IMG_SMALL_H,IMG_SMALL_W,P1_patt[i])
+		lbl1->Caption = i;
+		Application->ProcessMessages();
+    }
+
+
+    #undef PATT_SIZE
 }
 //---------------------------------------------------------------------------
+
+void __fastcall TForm1::edSpaceXChange(TObject *Sender)
+{
+	G_spaceBtwnSymX = StrToInt(edSpaceX->Text);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::edSpaceYChange(TObject *Sender)
+{
+	G_spaceBtwnSymY = StrToInt(edSpaceY->Text);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::edExtLeftChange(TObject *Sender)
+{
+  G_extBoardLeft = StrToInt(edExtLeft->Text);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::edExtRightChange(TObject *Sender)
+{
+  G_extBoardRight = StrToInt(edExtRight->Text);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::edExtTopChange(TObject *Sender)
+{
+  G_extBoardTop = StrToInt(edExtTop->Text);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::edExtBottomChange(TObject *Sender)
+{
+  G_extBoardBottom = StrToInt(edExtBottom->Text);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Button10Click(TObject *Sender)
+{
+    int symNumber = StrToInt(edSymNum->Text);
+    int x = G_crds[symNumber].xLeft;
+    int y = G_crds[symNumber].yTop;
+    int xSize = G_crds[symNumber].xRight - G_crds[symNumber].xLeft;
+    int ySize = G_crds[symNumber].yBottom - G_crds[symNumber].yTop;
+
+    M_SET_MATRIX(G_symbolMx,-1,SYM_SIZE,SYM_SIZE)
+
+    trimArray(G_imgSheetArr,G_symbolMx, ySize,xSize, y,x);
+    showImgFromArray(bigImg,G_symbolMx, SYM_SIZE,SYM_SIZE);
+}
+//---------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

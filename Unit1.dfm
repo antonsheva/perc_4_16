@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 0
   Caption = 'Form1'
   ClientHeight = 639
-  ClientWidth = 851
+  ClientWidth = 1052
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,8 +14,8 @@ object Form1: TForm1
   PixelsPerInch = 96
   TextHeight = 13
   object lbl1: TLabel
-    Left = 271
-    Top = 191
+    Left = 8
+    Top = 269
     Width = 26
     Height = 19
     Caption = 'lbl1'
@@ -95,10 +95,59 @@ object Form1: TForm1
     Caption = 'patt num'
   end
   object imgSht: TImage
-    Left = 440
+    Left = 644
     Top = 8
-    Width = 100
-    Height = 100
+    Width = 400
+    Height = 400
+  end
+  object Label9: TLabel
+    Left = 341
+    Top = 39
+    Width = 35
+    Height = 13
+    Caption = 'SpaceX'
+  end
+  object Label10: TLabel
+    Left = 341
+    Top = 59
+    Width = 35
+    Height = 13
+    Caption = 'SpaceY'
+  end
+  object Label11: TLabel
+    Left = 341
+    Top = 116
+    Width = 22
+    Height = 13
+    Caption = 'right'
+  end
+  object Label12: TLabel
+    Left = 341
+    Top = 136
+    Width = 16
+    Height = 13
+    Caption = 'top'
+  end
+  object Label13: TLabel
+    Left = 343
+    Top = 97
+    Width = 16
+    Height = 13
+    Caption = 'left'
+  end
+  object Label14: TLabel
+    Left = 341
+    Top = 157
+    Width = 34
+    Height = 13
+    Caption = 'bottom'
+  end
+  object Label15: TLabel
+    Left = 341
+    Top = 78
+    Width = 70
+    Height = 13
+    Caption = 'Extend boards'
   end
   object edIn1: TEdit
     Left = 8
@@ -271,19 +320,19 @@ object Form1: TForm1
     OnClick = Button3Click
   end
   object edInfo: TEdit
-    Left = 4
+    Left = 8
     Top = 362
-    Width = 430
+    Width = 388
     Height = 21
     Enabled = False
     TabOrder = 20
     Text = 'edInfo'
   end
   object lb1: TListBox
-    Left = 4
-    Top = 389
-    Width = 430
-    Height = 236
+    Left = 644
+    Top = 418
+    Width = 400
+    Height = 215
     ItemHeight = 13
     TabOrder = 21
   end
@@ -315,7 +364,7 @@ object Form1: TForm1
   end
   object Button4: TButton
     Left = 257
-    Top = 136
+    Top = 114
     Width = 75
     Height = 25
     Caption = 'load img'
@@ -324,7 +373,7 @@ object Form1: TForm1
   end
   object Button8: TButton
     Left = 257
-    Top = 167
+    Top = 141
     Width = 75
     Height = 25
     Caption = 'show img'
@@ -333,7 +382,7 @@ object Form1: TForm1
   end
   object Button7: TButton
     Left = 257
-    Top = 69
+    Top = 61
     Width = 75
     Height = 25
     Caption = 'lern'
@@ -410,7 +459,7 @@ object Form1: TForm1
   end
   object Button15: TButton
     Left = 257
-    Top = 38
+    Top = 34
     Width = 75
     Height = 25
     Caption = ' load patterns'
@@ -437,7 +486,7 @@ object Form1: TForm1
   end
   object btTest: TButton
     Left = 257
-    Top = 99
+    Top = 88
     Width = 75
     Height = 25
     Caption = 'test'
@@ -461,5 +510,97 @@ object Form1: TForm1
     Caption = 'search symb'
     TabOrder = 39
     OnClick = Button9Click
+  end
+  object edSpaceX: TEdit
+    Left = 382
+    Top = 39
+    Width = 30
+    Height = 21
+    MaxLength = 1
+    NumbersOnly = True
+    TabOrder = 40
+    Text = '3'
+    OnChange = edSpaceXChange
+  end
+  object edSpaceY: TEdit
+    Left = 382
+    Top = 58
+    Width = 30
+    Height = 21
+    MaxLength = 1
+    NumbersOnly = True
+    TabOrder = 41
+    Text = '3'
+    OnChange = edSpaceYChange
+  end
+  object edExtLeft: TEdit
+    Left = 382
+    Top = 94
+    Width = 30
+    Height = 21
+    MaxLength = 1
+    NumbersOnly = True
+    TabOrder = 42
+    Text = '2'
+    OnChange = edExtLeftChange
+  end
+  object edExtRight: TEdit
+    Left = 382
+    Top = 113
+    Width = 30
+    Height = 21
+    MaxLength = 1
+    NumbersOnly = True
+    TabOrder = 43
+    Text = '2'
+    OnChange = edExtRightChange
+  end
+  object edExtTop: TEdit
+    Left = 382
+    Top = 133
+    Width = 30
+    Height = 21
+    MaxLength = 1
+    NumbersOnly = True
+    TabOrder = 44
+    Text = '2'
+    OnChange = edExtTopChange
+  end
+  object edExtBottom: TEdit
+    Left = 382
+    Top = 153
+    Width = 30
+    Height = 21
+    MaxLength = 1
+    NumbersOnly = True
+    TabOrder = 45
+    Text = '2'
+    OnChange = edExtBottomChange
+  end
+  object Button10: TButton
+    Left = 257
+    Top = 185
+    Width = 75
+    Height = 25
+    Caption = 'show symbol'
+    TabOrder = 46
+    OnClick = Button10Click
+  end
+  object edSymNum: TEdit
+    Left = 338
+    Top = 187
+    Width = 58
+    Height = 21
+    NumbersOnly = True
+    TabOrder = 47
+    Text = '0'
+  end
+  object lb2: TListBox
+    Left = 419
+    Top = 8
+    Width = 206
+    Height = 623
+    ItemHeight = 13
+    TabOrder = 48
   end
 end
