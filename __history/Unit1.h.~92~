@@ -89,14 +89,13 @@ __published:	// IDE-managed Components
 	TEdit *edShftY;
 	TLabel *Label18;
 	TLabel *Label19;
+	TButton *Button18;
 	TEdit *edAngle;
 	TEdit *edWidth;
 	TEdit *edHeight;
 	TLabel *Label20;
 	TLabel *Label21;
 	TLabel *Label22;
-	TEdit *edTmp;
-	TButton *Button18;
 	void __fastcall Button1Click(TObject *Sender);
 	void __fastcall edAlfaChange(TObject *Sender);
 	void __fastcall edSigmodChange(TObject *Sender);
@@ -127,8 +126,8 @@ __published:	// IDE-managed Components
 	void __fastcall edExtBottomChange(TObject *Sender);
 	void __fastcall Button10Click(TObject *Sender);
 	void __fastcall Button17Click(TObject *Sender);
-	void __fastcall edAngleChange(TObject *Sender);
 	void __fastcall Button18Click(TObject *Sender);
+	void __fastcall edAngleChange(TObject *Sender);
 
 
 private:    // User declarations
@@ -157,8 +156,7 @@ public:		// User declarations
 
     
 	
-
-    void __fastcall turnImg(float **imgArr, double hw, int prevAngle);
+	
     void TForm1::initGoalArray();
 
 	int checkNewSymbol(int x, int y, S_coords *crd, int len);
@@ -181,7 +179,7 @@ public:		// User declarations
 	void TForm1::loadInputsGoalsData();
 	void loadImgToSmallBitmap(String flName, TImage *bimap);
 	void loadImgToBitmap(String flName, TImage * bitmap, int h, int w);
-    void loadBitmapToArray(TImage *bitmap, float **arr, int h, int w, DWORD *trueColorArr=NULL);
+    void loadBitmapToArray(TImage *bitmap, float **arr, int h, int w);
     void srchSnglImgPos(float **G_tmpImgArr1, S_imgPos *pos, int h, int w);
     void loadSmallImgToArray(float *arr);
 	void scaleImg(float **imgArr, int maxSize, float scale, int w, int h);

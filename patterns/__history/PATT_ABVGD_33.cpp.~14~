@@ -20,13 +20,13 @@ void TForm1::initNnParameters()
     G_extBoardTop = 3;
     G_extBoardBottom = 3;
     
-	Form1->edSpaceX->Text = G_spaceBtwnSymX;
-    Form1->edSpaceY->Text = G_spaceBtwnSymY;
+    Form1->edSpaceX = G_spaceBtwnSymX;
+    Form1->edSpaceY = G_spaceBtwnSymY;
     
-    Form1->edExtLeft->Text = G_extBoardLeft;
-    Form1->edExtRight->Text = G_extBoardRight;
-    Form1->edExtTop->Text = G_extBoardTop;
-    Form1->edExtBottom->Text = G_extBoardBottom;
+    Form1->edExtLeft = G_extBoardLeft;
+    Form1->edExtRight = G_extBoardRight;
+    Form1->edExtTop = G_extBoardTop;
+    Form1->edExtBottom = G_extBoardBottom
 
 
     G_sigmoidTilt = 5;

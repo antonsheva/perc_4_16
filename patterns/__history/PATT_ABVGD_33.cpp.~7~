@@ -1,0 +1,75 @@
+﻿#include "Unit1.h"
+
+#define PATT_QTY 43
+#define OUT_N_LEN 43
+String imgFiles[PATT_QTY];
+float P1_goal[PATT_QTY][OUT_N_LEN];
+
+void TForm1::initNnParameters()
+{
+    G_sigmoidTilt = 5;
+    Form1->edSigmod->Text = "5";
+
+    G_alfa = 0.0001;
+    Form1->edAlfa->Text = "0,0001";
+}
+
+
+
+void TForm1::initGoalArray()
+{
+    for(int i=0; i<PATT_QTY; i++){
+        for(int k=0; k<PATT_QTY; k++){
+            if(k==i)P1_goal[i][k]=1;
+            else    P1_goal[i][k]=0;
+        }
+    }
+}
+
+
+
+void TForm1::showResult(float *nGoal)
+{
+
+struct S_indData
+{
+	char index;
+	float  val;
+};
+	AnsiString tmpStr;
+	S_indData indData[PATT_QTY];
+    char strArr[50] = {'А',
+    'Б','В','Г','Д','Е','Ё','Ж','З','И','Й','К','Л','М','Н',
+    'О','П','Р','С','Т','У','Ф','Х','Ц','Ч','Ш','Щ','Ъ','Ы',
+    'Ь','Э','Ю','Я','1','2','3','4','5','6','7','8','9','0',
+    '-','/','*','+','=','.',','};
+    for(int i=0;i<PATT_QTY;i++){
+        indData[i].index=strArr[i];
+        indData[i].val = nGoal[i];
+    }
+
+    float tmpVal;
+    char  tmpInd;
+    for (int i = 1; i < PATT_QTY; i++){
+        if(indData[i].val<indData[i].val-1){
+            tmpVal=indData[i].val;
+            tmpInd=indData[i].index;
+			indData[i].val  =indData[i-1].val;
+            indData[i].index=indData[i-1].index;
+
+            indData[i-1].val=tmpVal;
+            indData[i-1].index=tmpInd;
+ 
+        }
+    }
+
+    
+    lb2->Clear();
+    for(int i=0; i<PATT_QTY; i++){
+		tmpStr.c_str()[0] =  indData[i].index;
+        tmpStr += " - "+ FloatToStr(indData[i].val);;
+        lb2->Items->Add(tmpStr);
+    }
+}
+
+ 

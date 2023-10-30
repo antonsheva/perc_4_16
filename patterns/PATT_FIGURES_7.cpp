@@ -2,6 +2,11 @@
 
 #define OUT_N_LEN 7
 #define PATT_QTY 42
+
+#define IN_N_LEN 784
+#define MN1_LEN 16
+#define MN2_LEN 16
+
 String imgFiles[PATT_QTY];
 
 float P1_goal[PATT_QTY][OUT_N_LEN] = {

@@ -33,7 +33,6 @@ TForm1 *Form1;
 #define IMG_POS_LEFT_TOP 1
 #define IMG_POS_CENTER   2
 
-#define ONE_DEGREE 0.01744444
 
 float arrN0[N0_LEN];
 float arrN1[N1_LEN];
@@ -114,7 +113,6 @@ DWORD trueColorArr[19600];
 
 AFuncs *mf;
 FILE *fl;
-Graphics::TBitmap *G_bmp = new Graphics::TBitmap;
 
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent *Owner)
@@ -132,8 +130,6 @@ __fastcall TForm1::TForm1(TComponent *Owner)
     G_extBoardRight = 2;
     G_extBoardTop = 2;
     G_extBoardBottom = 2;
-
-    G_bmp = new Graphics::TBitmap(); //
 
     initNnParameters();
 
@@ -156,7 +152,7 @@ __fastcall TForm1::~TForm1(){
 
     delete G_symbolMx;
 
-    delete G_bmp;
+
 
 
 }
@@ -1540,38 +1536,41 @@ void __fastcall TForm1::edAngleChange(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-DWORD MtmpArr[IMG_BIG_H][IMG_BIG_H];
 void __fastcall TForm1::turnImg(float **imgArr, double hw, int prevAngle)
 {
    TCanvas * img = bigImg1->Canvas;
    TCanvas * bmp_c;
-
-   G_bmp->PixelFormat = pf32bit;    //
-   G_bmp->SetSize(IMG_BIG_H,IMG_BIG_H);
-   bmp_c = G_bmp->Canvas;
+   Graphics::TBitmap *bmp = new Graphics::TBitmap;
+   bmp = new Graphics::TBitmap(); //
+   bmp->PixelFormat = pf32bit;    //
+   bmp->SetSize(IMG_BIG_H,IMG_BIG_H);
+   bmp_c = bmp->Canvas;
 
  
-   
+   DWORD tmpArr[IMG_BIG_H][IMG_BIG_H];
    float angle = prevAngle%360;
-//    double radius = sqrt(pow(70.0,2)+pow(70.0,2));
-  
+   double radius = sqrt(pow(hw/2,2)+pow(hw/2,2));
+   double side = sqrt(pow(radius,2)+pow(radius,2));
 
-   double x1 = cos(ONE_DEGREE*angle)      *99.994949+70;
-   double y1 = sin(ONE_DEGREE*angle)      *99.994949+70;
-   double x2 = cos(ONE_DEGREE*(angle+90)) *99.994949+70;
-   double y2 = sin(ONE_DEGREE*(angle+90)) *99.994949+70;
-   double x3 = cos(ONE_DEGREE*(angle+180))*99.994949+70;
-   double y3 = sin(ONE_DEGREE*(angle+180))*99.994949+70;
-   double x4 = cos(ONE_DEGREE*(angle+270))*99.994949+70;
-   double y4 = sin(ONE_DEGREE*(angle+270))*99.994949+70;
+
+   double rad = 6.28/360*angle;
+   edTmp->Text = FormatFloat("0.00",rad);
+   double x1 = cos(6.28/360*angle)      *radius+hw/2;
+   double y1 = sin(6.28/360*angle)      *radius+hw/2;
+   double x2 = cos(6.28/360*(angle+90)) *radius+hw/2;
+   double y2 = sin(6.28/360*(angle+90)) *radius+hw/2;
+   double x3 = cos(6.28/360*(angle+180))*radius+hw/2;
+   double y3 = sin(6.28/360*(angle+180))*radius+hw/2;
+   double x4 = cos(6.28/360*(angle+270))*radius+hw/2;
+   double y4 = sin(6.28/360*(angle+270))*radius+hw/2;
 
 
 
    double dY;
-   double shftX =  abs((x2-x1)/140);
-   double shftY =  abs((y4-y1)/140);
-   double shftX1 = abs((x1-x4)/140);
-   double shftY1 = abs((y2-y1)/140);
+   double shftX =  abs((x2-x1)/side);
+   double shftY =  abs((y4-y1)/side);
+   double shftX1 = abs((x1-x4)/side);
+   double shftY1 = abs((y2-y1)/side);
    int k;
    float dX1 = abs(x1-x2);
    float dX2;
@@ -1591,15 +1590,18 @@ void __fastcall TForm1::turnImg(float **imgArr, double hw, int prevAngle)
    if((angle > 225)&&(angle < 316))vector = vectors[3];
    if((angle > 315)&&(angle < 361))vector = vectors[0];
 
-   M_SET_MATRIX(MtmpArr, clWhite, IMG_BIG_H,IMG_BIG_H)
-   for(int i=1; i<140; i++){
+   bigImg1->Canvas->Rectangle(0,0,hw, hw);
+   M_SET_MATRIX(tmpArr, clWhite, IMG_BIG_H,IMG_BIG_H)
+   for(int i=1; i<side-1; i++){
 		dY = y1;
 		dX2 = x1;
 		k=0;
 		for(double dX=0; dX<dX1; dX += shftX){
 			dX2 += shftX*vector[0];
-			if(k<140 && dX2<140 && dY<140 && dX<140)
-				MtmpArr[(int)dX2][(int)dY] = trueColorArr[i*(IMG_BIG_H)+k];
+			if(k<140 && dX2<140 && dY<140)
+//				 if(imgArr[k][i] > -0.1)
+//                    tmpArr[(int)dX2][(int)dY] = clRed;
+					tmpArr[(int)dX2][(int)dY] = trueColorArr[i*(IMG_BIG_H)+k];
 //					bigImg1->Canvas->Pixels[dX2][dY] = clRed;
 
 
@@ -1612,17 +1614,17 @@ void __fastcall TForm1::turnImg(float **imgArr, double hw, int prevAngle)
    }
 
    for(int i=0; i<IMG_BIG_H; i++){
-		lineNum = (DWORD *)G_bmp->ScanLine[i];
+		lineNum = (DWORD *)bmp->ScanLine[i];
 		for(int k=0; k<IMG_BIG_H; k++){
-			lineNum[k] = MtmpArr[i][k];
+			lineNum[k] = tmpArr[i][k];
 		}
    }
    BitBlt(img->Handle,0,0,140,140,bmp_c->Handle,0,0,SRCCOPY);
 
-   bigImg1->Canvas->Pixels[70][70] = clBlack;
+   bigImg1->Canvas->Pixels[(int)hw/2][(int)hw/2] = clBlack;
 
 
-  
+   delete bmp;
 }
 
 

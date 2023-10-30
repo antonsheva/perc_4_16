@@ -183,27 +183,6 @@ object Form1: TForm1
     Height = 13
     Caption = 'ShftY'
   end
-  object Label20: TLabel
-    Left = 307
-    Top = 341
-    Width = 27
-    Height = 13
-    Caption = 'Angle'
-  end
-  object Label21: TLabel
-    Left = 346
-    Top = 341
-    Width = 28
-    Height = 13
-    Caption = 'Width'
-  end
-  object Label22: TLabel
-    Left = 383
-    Top = 341
-    Width = 31
-    Height = 13
-    Caption = 'Height'
-  end
   object edIn1: TEdit
     Left = 8
     Top = 8
@@ -659,8 +638,8 @@ object Form1: TForm1
     TabOrder = 48
   end
   object Button17: TButton
-    Left = 300
-    Top = 383
+    Left = 178
+    Top = 311
     Width = 61
     Height = 25
     Caption = 'Turn'
@@ -698,49 +677,5 @@ object Form1: TForm1
     Height = 21
     TabOrder = 53
     Text = '-20'
-  end
-  object edAngle: TEdit
-    Left = 300
-    Top = 356
-    Width = 36
-    Height = 21
-    NumbersOnly = True
-    TabOrder = 54
-    Text = '45'
-    OnChange = edAngleChange
-  end
-  object edWidth: TEdit
-    Left = 341
-    Top = 357
-    Width = 36
-    Height = 21
-    TabOrder = 55
-    Text = '50'
-  end
-  object edHeight: TEdit
-    Left = 380
-    Top = 357
-    Width = 36
-    Height = 21
-    TabOrder = 56
-    Text = '100'
-  end
-  object edTmp: TEdit
-    Left = 372
-    Top = 417
-    Width = 36
-    Height = 21
-    NumbersOnly = True
-    TabOrder = 57
-    Text = '45'
-  end
-  object Button18: TButton
-    Left = 300
-    Top = 464
-    Width = 59
-    Height = 25
-    Caption = 'Button18'
-    TabOrder = 58
-    OnClick = Button18Click
   end
 end

@@ -26,7 +26,7 @@ void TForm1::initNnParameters()
     Form1->edExtLeft->Text = G_extBoardLeft;
     Form1->edExtRight->Text = G_extBoardRight;
     Form1->edExtTop->Text = G_extBoardTop;
-    Form1->edExtBottom->Text = G_extBoardBottom;
+    Form1->edExtBottom->Text = G_extBoardBottom
 
 
     G_sigmoidTilt = 5;

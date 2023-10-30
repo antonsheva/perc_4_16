@@ -1556,14 +1556,14 @@ void __fastcall TForm1::turnImg(float **imgArr, double hw, int prevAngle)
 //    double radius = sqrt(pow(70.0,2)+pow(70.0,2));
   
 
-   double x1 = cos(ONE_DEGREE*angle)      *99.994949+70;
-   double y1 = sin(ONE_DEGREE*angle)      *99.994949+70;
-   double x2 = cos(ONE_DEGREE*(angle+90)) *99.994949+70;
-   double y2 = sin(ONE_DEGREE*(angle+90)) *99.994949+70;
-   double x3 = cos(ONE_DEGREE*(angle+180))*99.994949+70;
-   double y3 = sin(ONE_DEGREE*(angle+180))*99.994949+70;
-   double x4 = cos(ONE_DEGREE*(angle+270))*99.994949+70;
-   double y4 = sin(ONE_DEGREE*(angle+270))*99.994949+70;
+   double x1 = cos(ONE_DEGREE*angle)      *169;
+   double y1 = sin(ONE_DEGREE*angle)      *169;
+   double x2 = cos(ONE_DEGREE*(angle+90)) *169;
+   double y2 = sin(ONE_DEGREE*(angle+90)) *169;
+   double x3 = cos(ONE_DEGREE*(angle+180))*169;
+   double y3 = sin(ONE_DEGREE*(angle+180))*169;
+   double x4 = cos(ONE_DEGREE*(angle+270))*169;
+   double y4 = sin(ONE_DEGREE*(angle+270))*169;
 
 
 
@@ -1591,7 +1591,7 @@ void __fastcall TForm1::turnImg(float **imgArr, double hw, int prevAngle)
    if((angle > 225)&&(angle < 316))vector = vectors[3];
    if((angle > 315)&&(angle < 361))vector = vectors[0];
 
-   M_SET_MATRIX(MtmpArr, clWhite, IMG_BIG_H,IMG_BIG_H)
+   M_SET_MATRIX(tmpArr, clWhite, IMG_BIG_H,IMG_BIG_H)
    for(int i=1; i<140; i++){
 		dY = y1;
 		dX2 = x1;
@@ -1619,7 +1619,7 @@ void __fastcall TForm1::turnImg(float **imgArr, double hw, int prevAngle)
    }
    BitBlt(img->Handle,0,0,140,140,bmp_c->Handle,0,0,SRCCOPY);
 
-   bigImg1->Canvas->Pixels[70][70] = clBlack;
+   bigImg1->Canvas->Pixels[(int)hw/2][(int)hw/2] = clBlack;
 
 
   

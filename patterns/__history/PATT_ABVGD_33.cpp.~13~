@@ -2,39 +2,16 @@
 
 #define PATT_QTY 43
 #define OUT_N_LEN 43
-
-#define IN_N_LEN 784
-#define MN1_LEN 45
-#define MN2_LEN 45
-
 String imgFiles[PATT_QTY];
 float P1_goal[PATT_QTY][OUT_N_LEN];
 
 void TForm1::initNnParameters()
 {
-	G_spaceBtwnSymX = 6;
-    G_spaceBtwnSymY = 8;
-
-    G_extBoardLeft = 3;
-    G_extBoardRight = 3;
-    G_extBoardTop = 3;
-    G_extBoardBottom = 3;
-    
-	Form1->edSpaceX->Text = G_spaceBtwnSymX;
-    Form1->edSpaceY->Text = G_spaceBtwnSymY;
-    
-    Form1->edExtLeft->Text = G_extBoardLeft;
-    Form1->edExtRight->Text = G_extBoardRight;
-    Form1->edExtTop->Text = G_extBoardTop;
-    Form1->edExtBottom->Text = G_extBoardBottom;
-
-
     G_sigmoidTilt = 5;
     Form1->edSigmod->Text = "5";
 
-    G_alfa = 0.01;
-    Form1->edAlfa->Text = "0,01";
-    Application->ProcessMessages();
+    G_alfa = 0.0001;
+    Form1->edAlfa->Text = "0,0001";
 }
 
 
@@ -95,7 +72,7 @@ struct S_indData
     lb2->Clear();
     for(int i=0; i<PATT_QTY; i++){
 		tmpStr = indData[i].index;
-		tmpStr = IntToStr(i)+ " - " + tmpStr ;
+		tmpStr = tmpStr + " - "+IntToStr(i);
         tmpStr +=" - "+ FloatToStr(indData[i].val);;
         lb2->Items->Add(tmpStr);
     }
